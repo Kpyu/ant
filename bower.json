@@ -1,0 +1,22 @@
+{
+  "name": "antcms",
+  "description": "a simple cms",
+  "main": "app.js",
+  "authors": [
+    "kpyu"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "cms",
+    "react",
+    "antDesign"
+  ],
+  "homepage": "https://github.com/Alex1512/AntCMS",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

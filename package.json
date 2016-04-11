@@ -1,0 +1,28 @@
+{
+  "name": "antcms",
+  "version": "0.0.0",
+  "description": "a simple cms",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex1512/AntCMS.git"
+  },
+  "keywords": [
+    "cms",
+    "react",
+    "antDesign"
+  ],
+  "author": "kpyu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Alex1512/AntCMS/issues"
+  },
+  "homepage": "https://github.com/Alex1512/AntCMS#readme",
+  "dependencies": {
+    "antd": "^1.0.0-beta.1",
+    "react": "^0.14.8"
+  }
+}
