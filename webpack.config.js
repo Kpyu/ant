@@ -20,22 +20,16 @@ function makeConfig(env) {
   var publicPath = publicPathConfig[envStr] || publicPathConfig.default;
 
   config = {
-    addVendor: function(name, vendorPath) {
-      this.resolve.alias[name] = vendorPath;
-      this.module.noParse.push(vendorPath);
-    },
     context: __dirname,
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['./client/js/app.js', hotMiddleWareScript] : './client/js/app.js',
+        ['eventsource-polyfill', './client/js/app.js', hotMiddleWareScript] : './client/js/app.js',
       login: (envStr === 'development') ?
         ['./client/js/login.js', hotMiddleWareScript] : './client/js/login.js',
       vendor: [
-        'jquery',
-        'angular',
-        'normalize.css',
-        './client/less/common.less'
+        'antd',
+        'react'
       ]
     },
     output: {
@@ -49,8 +43,8 @@ function makeConfig(env) {
     resolve: {
       alias: {
         bower: bowerDir,
-        'normalize.css': path.resolve(bowerDir, 'normalize-css/normalize.css'),
-        'font-awesome.css': path.resolve(bowerDir, 'font-awesome/css/font-awesome.min.css'),
+        antd: path.resolve(nodeModulesDir, 'antd'),
+        react: path.resolve(nodeModulesDir, 'react')
       }
     },
     module: {
@@ -58,9 +52,21 @@ function makeConfig(env) {
       loaders: [
         {
           test: /\.js$/,
-          // exclude: /(node_modules|bower_components|client)/,path.resolve('src')
-          exclude: path.resolve('src'),
+          exclude: path.resolve('client'),
           loader: 'babel'
+        },
+        {
+          test: /\.jsx?$/,
+          loader: 'babel',
+          query: {
+            presets: ['es2015-node5', 'stage-3', 'react'],
+            env: {
+              development: {
+                presets: ['react-hmre']
+              }
+            }
+          },
+          exclude: path.resolve('client')
         },
         {
           test: /\.css$/,
@@ -83,22 +89,23 @@ function makeConfig(env) {
     postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
       new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
         '[name]-[chunkhash].css' : '[name].css'),
       new webpack.ProvidePlugin({
-        angular: 'exports?window.angular!angular',
-        $: 'exports?window.jQuery!jquery'
+        react: 'exports?window.react!react'
       }),
       new webpack.optimize.DedupePlugin(),
       new webpack.NoErrorsPlugin(),
-      new webpack.ContextReplacementPlugin(/.*$/, /a^/),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
     devtool: 'cheap-module-eval-source-map'
   };
   // generate manifest.json
   config.plugins.push(function() {
-    console.log('配置信息')
+    console.log('配置信息');
     this.plugin('done', function(stats) {
       var assets = stats.toJson().assetsByChunkName;
       var assetName;
@@ -130,5 +137,4 @@ function makeConfig(env) {
   });
   return config;
 }
-
 module.exports = makeConfig;

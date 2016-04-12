@@ -32,7 +32,7 @@ node_modules
 npm-debug.log
 .DS_Store
 dist/
-built/*
+build/
 manifest.json
 bower_components
 config/local

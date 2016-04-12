@@ -4,8 +4,9 @@
     "es2015"
   ],
   "plugins": [
-    "syntax-async-generators",
     "check-es2015-constants",
+    "transform-async-to-generator",
+    "transform-runtime",
     "transform-es2015-arrow-functions",
     "transform-es2015-block-scoped-functions",
     "transform-es2015-block-scoping",
