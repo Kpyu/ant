@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    <%- locals.title || '首页' %>
+  </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
+  <meta name="imagemode" content="force">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <%- vender('vendor') %>
+</head>
+<body ng-app="demo-app">
+  <div class="loading" style="display: none;"></div>
+  <div class="overlay" style="display: none;"></div>
+  <h1>首页</h1>
+  <h1>Hello World</h1>
+  <div>你好世界</div>
+  <div data-ui-view=""></div>
+  <%- script('app') %>
+</body>
+
+</html>

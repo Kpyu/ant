@@ -24,9 +24,10 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['eventsource-polyfill', './client/js/app.js', hotMiddleWareScript] : './client/js/app.js',
+        ['eventsource-polyfill', './client/src/app.jsx',
+        hotMiddleWareScript] : './client/src/app.jsx',
       login: (envStr === 'development') ?
-        ['./client/js/login.js', hotMiddleWareScript] : './client/js/login.js',
+        ['./client/src/login.jsx', hotMiddleWareScript] : './client/src/login.jsx',
       vendor: [
         'antd',
         'react'
@@ -59,7 +60,7 @@ function makeConfig(env) {
           test: /\.jsx?$/,
           loader: 'babel',
           query: {
-            presets: ['es2015-node5', 'stage-3', 'react'],
+            presets: ['stage-0', 'es2015-node5', 'stage-3', 'react'],
             env: {
               development: {
                 presets: ['react-hmre']
