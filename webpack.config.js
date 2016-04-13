@@ -24,7 +24,7 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['eventsource-polyfill', './client/src/app.jsx',
+        ['event-source-polyfill', './client/src/app.jsx',
         hotMiddleWareScript] : './client/src/app.jsx',
       login: (envStr === 'development') ?
         ['./client/src/login.jsx', hotMiddleWareScript] : './client/src/login.jsx',

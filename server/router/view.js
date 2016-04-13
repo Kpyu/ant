@@ -4,9 +4,7 @@
  */
 export default class View {
   static index(ctx, next) {
-    console.log('进入首页');
-    console.log(ctx);
-    ctx.render('index', ctx.state);
+    ctx.render('index');
   }
   static login(ctx, next) {
     ctx.render('login', ctx.state);

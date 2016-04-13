@@ -30,6 +30,7 @@ export default function (opts) {
   }
   opts.prepend = opts.prepend || '';
   return async (ctx, next) => {
+    console.log('进入资源管道');
     const manifest = require(opts.manifest);
     ctx.state = ctx.state || {};
     ctx.state.assets = fileName => {

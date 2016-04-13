@@ -16,12 +16,14 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import koaRouter from 'koa-router';
+// import koaRouter from 'koa-router';
+import Router from 'koa-66';
 import View from './view';
 // 路由基本用法
 const view = new View();
-const router = koaRouter();
-router.get('/', function (ctx, next) {
-  View.index(ctx, next);
+const router = new Router();
+router.get('/', async (ctx, next) => {
+  // await View.index(ctx, next);
+  await ctx.render('index');
 });
 module.exports = router;
