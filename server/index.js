@@ -28,7 +28,7 @@ import views from 'koa-views';
 import render from 'koa-ejs';
 import co from 'co';
 import Boom from 'boom';
-
+import favicon from 'koa-favicon';
 import logger from './logger';
 import Config from '../config';
 import assetsPipeLine from './middleware/assetsPipeLine';
@@ -39,6 +39,9 @@ app.use(convert(bunyanLogger(logger, {
   level: 'info',
   timeLimit: 250
 })));
+
+app.use(favicon(__dirname + '/client/favicon.ico'));
+
 // 添加webpack 中间件
 if (Config.env === 'development') {
   Config.developmentMiddleWare(app);
@@ -63,14 +66,12 @@ app.use(assetsPipeLine({
 // 添加各种中间件
 app.use(bodyParser());
 // 注册路由
-// app
-//   .use(router.routes());
+app.use(router.routes());
 // .use(router.allowedMethods({
 //   throw: true,
 //   notImplemented: () => new Boom.notImplemented(),
 //   methodNotAllowed: () => new Boom.methodNotAllowed()
 // }));
-
 app.listen(Config.port, function () {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);
 });

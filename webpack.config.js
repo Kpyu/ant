@@ -52,12 +52,7 @@ function makeConfig(env) {
       noParse: [],
       loaders: [
         {
-          test: /\.js$/,
-          exclude: path.resolve('client'),
-          loader: 'babel'
-        },
-        {
-          test: /\.jsx?$/,
+          test: /\.jsx|\.js?$/,
           loader: 'babel',
           query: {
             presets: ['stage-0', 'es2015-node5', 'stage-3', 'react'],
@@ -65,7 +60,8 @@ function makeConfig(env) {
               development: {
                 presets: ['react-hmre']
               }
-            }
+            },
+            compact: false
           },
           exclude: path.resolve('client')
         },

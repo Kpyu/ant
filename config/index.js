@@ -68,11 +68,11 @@ const config = {
       publicPath: webpackConfig.output.publicPath,
       status: { colors: true },
       quiet: false,
-      watchOptions: {
-        aggregateTimeout: 300,
-        poll: true
-      },
-      lazy: true
+      // watchOptions: {
+      //   aggregateTimeout: 300,
+      //   poll: true
+      // },
+      // lazy: true
     }));
     app.use(hotMiddleware(compiler));
   },

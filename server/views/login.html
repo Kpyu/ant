@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>
-    <%- locals.title || '首页' %>
+    <%- locals.title || '登录' %>
   </title>
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
   <meta name="imagemode" content="force">
@@ -18,10 +18,8 @@
 <body ng-app="demo-app">
   <div class="loading" style="display: none;"></div>
   <div class="overlay" style="display: none;"></div>
-  <h1>首页</h1>
-  <h1>Hello World</h1>
-  <div>你好世界</div>
-  <%- script('app') %>
+  <h1>登录</h1>
+  <%- script('login') %>
 </body>
 
 </html>
