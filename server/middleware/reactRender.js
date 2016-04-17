@@ -1,6 +1,9 @@
 import React from 'react';
 import path from 'path';
 import assign from 'object-assign';
+import co from 'co';
+
+
 const beautifyHTML = require('js-beautify').html;
 const ReactDOMServer = require('react-dom/server');
 let DEFAULT_SETTINGS = {
@@ -10,13 +13,14 @@ let DEFAULT_SETTINGS = {
   transformViews: true
 };
 
-function createEngine (app, settings) {
-  if (app.context.render) {
+export function reactRender(app, settings) {
+  if (app.context.renderReact) {
     return;
   }
-
   settings = assign({}, DEFAULT_SETTINGS, settings || {});
+
   settings.root = path.resolve(process.cwd(), settings.root || './views');
+
   if (settings.transformViews) {
     require('babel-core/register')({
       only: settings.root
@@ -27,11 +31,11 @@ function createEngine (app, settings) {
 
   /**
    * Render html using view and props
-   * @param {String} view
-   * @param {Object} props
-   * @return {String} html
+   * @param {String} view 视图路径
+   * @param {Object} props 配置属性
+   * @return {String} html 渲染结果
    */
-  function* render (view, props) {
+  function* render(view, props) {
     view += settings.viewExt;
     let viewPath = path.join(settings.root, view);
     let html = settings.doctype;
@@ -50,7 +54,7 @@ function createEngine (app, settings) {
 
     if (app.env === 'development') {
       // Remove all files from the module cache that are in the view folder.
-      Object.keys(require.cache).forEach(function(module) {
+      Object.keys(require.cache).forEach(function (module) {
         if (moduleDetectRegEx.test(module)) {
           delete require.cache[module];
         }
@@ -59,16 +63,14 @@ function createEngine (app, settings) {
 
     return html;
   }
-
-  app.context.render = function* (view, _context) {
+  app.context.react = co(function* (view, _context) {
     let context = {};
     assign(context, this.state);
     assign(context, _context);
 
-    let html = yield *render(view, context);
+    let html = yield* render(view, context);
     this.type = 'html';
     this.body = html;
     return html;
-  };
+  });
 }
-exports = module.exports = createEngine;

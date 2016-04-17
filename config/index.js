@@ -39,21 +39,25 @@ const config = {
     cache: DEBUG ? false : 'memory',
     debug: DEBUG
   },
+  reactConfig: {
+    root: Path.resolve(__dirname, '..', 'client', 'src'),
+    viewExt: 'jsx'
+  },
   static: { // 静态资源目录配置
     directory: Path.resolve(__dirname, '..', 'dist')
   },
-  envConfig: function(name) {
+  envConfig: function (name) {
     return require('./' + (process.env.NODE_ENV || 'development') + '/' + name);
   },
   /**
    * @param app koa app
    */
-  developmentMiddleWare: function(app) {
+  developmentMiddleWare: function (app) {
     let webpackConfig = require('../webpack.config')(config.env);
     let ProgressPlugin = require('webpack/lib/ProgressPlugin');
     let chalk = require('chalk');
     let compiler = webpack(webpackConfig);
-    compiler.apply(new ProgressPlugin(function(percentage, msg) {
+    compiler.apply(new ProgressPlugin(function (percentage, msg) {
       var stream = process.stderr;
       if (stream.isTTY && percentage < 0.71) {
         stream.cursorTo(0);

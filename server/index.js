@@ -29,6 +29,7 @@ import render from 'koa-ejs';
 import co from 'co';
 import Boom from 'boom';
 import favicon from 'koa-favicon';
+import { renderReact } from './middleware/reactRender';
 import logger from './logger';
 import Config from '../config';
 import assetsPipeLine from './middleware/assetsPipeLine';
@@ -49,10 +50,12 @@ if (Config.env === 'development') {
 
 
 
-// 添加视图解析器
+// 添加ejs视图解析器
 render(app, Config.view);
 app.context.render = co.wrap(app.context.render);
 
+// 添加react渲染器
+renderReact(app, Config.reactConfig);
 
 // 添加静态资源服务中间件
 app.use(serve(Config.static.directory));
@@ -67,11 +70,7 @@ app.use(assetsPipeLine({
 app.use(bodyParser());
 // 注册路由
 app.use(router.routes());
-// .use(router.allowedMethods({
-//   throw: true,
-//   notImplemented: () => new Boom.notImplemented(),
-//   methodNotAllowed: () => new Boom.methodNotAllowed()
-// }));
+
 app.listen(Config.port, function () {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);
 });
