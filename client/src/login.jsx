@@ -16,7 +16,17 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, renderToString } from 'react';
+import { match, Router } from 'react-router';
+import { render } from 'react-dom';
+import { createHistory } from 'history';
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import { deepOrange500 } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 /**
   组件的生命周期主要由三个部分组成：
@@ -45,11 +55,83 @@ import React, { Component, PropTypes } from 'react';
   findDOMNode()：获取真实的DOM
   forceUpdate()：强制更新
 **/
-export default class ReactLogin extends Component {
+const styles = {
+  container: {
+    textAlign: 'center',
+    paddingTop: 200
+  }
+};
+
+const muiTheme = getMuiTheme({
+  palette: {
+    accent1Color: deepOrange500
+  }
+});
+
+class ReactLogin extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.handleTouchTap = this.handleTouchTap.bind(this);
+
+    this.state = {
+      open: false
+    };
+  }
   componentWillMount() {
     console.log('执行登陆页渲染');
   }
   componentDidMount() {
     console.log('登陆页渲染完成');
   }
+  handleRequestClose() {
+    this.setState({
+      open: false
+    });
+  }
+
+  handleTouchTap() {
+    this.setState({
+      open: true
+    });
+  }
+
+  render() {
+    const standardActions = (
+      <FlatButton
+        label="Ok"
+        secondary={true}
+        onTouchTap={this.handleRequestClose}
+        />
+    );
+
+    return (
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div style={styles.container}>
+          <Dialog
+            open={this.state.open}
+            title="Super Secret Password"
+            actions={standardActions}
+            onRequestClose={this.handleRequestClose}
+            >
+            1-2-3-4-5
+          </Dialog>
+          <h1>material-ui</h1>
+          <h2>example project</h2>
+          <RaisedButton
+            label="Super Secret Password"
+            primary={true}
+            onTouchTap={this.handleTouchTap}
+            />
+        </div>
+      </MuiThemeProvider>
+    );
+  }
 }
+render(
+  <ReactLogin />,
+  document.getElementById('app')
+);
+
+

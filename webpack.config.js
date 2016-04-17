@@ -25,7 +25,7 @@ function makeConfig(env) {
     entry: {
       app: (envStr === 'development') ?
         ['event-source-polyfill', './client/src/app.jsx',
-        hotMiddleWareScript] : './client/src/app.jsx',
+          hotMiddleWareScript] : './client/src/app.jsx',
       login: (envStr === 'development') ?
         ['./client/src/login.jsx', hotMiddleWareScript] : './client/src/login.jsx',
       vendor: [
@@ -98,12 +98,21 @@ function makeConfig(env) {
       new webpack.NoErrorsPlugin(),
       new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
-    devtool: 'cheap-module-eval-source-map'
+    devtool: 'cheap-module-eval-source-map',
+    // Server Configuration options
+    devServer: {
+      contentBase: 'client',  // Relative directory for base of server
+      devtool: 'eval',
+      hot: true,        // Live-reload
+      inline: true,
+      port: 3001,        // Port Number
+      host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
+    }
   };
   // generate manifest.json
-  config.plugins.push(function() {
+  config.plugins.push(function () {
     console.log('配置信息');
-    this.plugin('done', function(stats) {
+    this.plugin('done', function (stats) {
       var assets = stats.toJson().assetsByChunkName;
       var assetName;
       var vendors;
@@ -117,7 +126,7 @@ function makeConfig(env) {
           if (typeof assets[i] === 'object' ||
             Object.prototype.toString.call(assets[i]) === '[object Array]') {
             console.log(assets[i]);
-            vendors.forEach(function(src, index) {
+            vendors.forEach(function (src, index) {
               vendors[index] = [publicPath, '/', src].join('');
               console.log(src);
             });

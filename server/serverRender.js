@@ -16,20 +16,9 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-class User {
-  constructor(param) {
-    super(param);
-  }
-  /**
-   * 查询用户列表
-   */
-  query(pageInfo, queryInfo) {
+import React, { renderToString } from 'react';
+import { match, RoutingContext } from 'react-router';
+import Fs from 'fs';
 
-  }
-  /**
-   * 查询单个用户
-   */
-  queryOne(userId) {
-
-  }
+export default function renderApp(props, res) {
 }

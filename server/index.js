@@ -23,7 +23,7 @@ import bunyanLogger from 'koa-bunyan';
 import bodyParser from 'koa-bodyparser';
 import convert from 'koa-convert';
 import serve from 'koa-static';
-// import serve from 'koa-static-cache';
+import serveCache from 'koa-static-cache';
 import views from 'koa-views';
 import render from 'koa-ejs';
 import co from 'co';
