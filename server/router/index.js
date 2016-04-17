@@ -19,7 +19,6 @@
 // import koaRouter from 'koa-router';
 import Router from 'koa-66';
 // 路由基本用法
-const view = new View();
 const router = new Router();
 
 
