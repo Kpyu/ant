@@ -38,6 +38,7 @@
     "event-source-polyfill": "0.0.7",
     "history": "^2.0.2",
     "joi": "^8.0.5",
+    "js-beautify": "^1.6.2",
     "koa": "^2.0.0",
     "koa-66": "^0.8.4",
     "koa-bodyparser": "^3.0.0",

@@ -29,7 +29,7 @@ import render from 'koa-ejs';
 import co from 'co';
 import Boom from 'boom';
 import favicon from 'koa-favicon';
-import { renderReact } from './middleware/reactRender';
+import renderReact from './middleware/reactRender';
 import logger from './logger';
 import Config from '../config';
 import assetsPipeLine from './middleware/assetsPipeLine';
@@ -47,8 +47,6 @@ app.use(favicon(__dirname + '/client/favicon.ico'));
 if (Config.env === 'development') {
   Config.developmentMiddleWare(app);
 }
-
-
 
 // 添加ejs视图解析器
 render(app, Config.view);

@@ -21,8 +21,6 @@ import Router from 'koa-66';
 // 路由基本用法
 const router = new Router();
 
-
-
 router.get('/', async (ctx, next) => {
   await ctx.render('index');
 });

@@ -13,7 +13,7 @@ let DEFAULT_SETTINGS = {
   transformViews: true
 };
 
-export function reactRender(app, settings) {
+export default function reactRender(app, settings) {
   if (app.context.renderReact) {
     return;
   }
@@ -63,6 +63,16 @@ export function reactRender(app, settings) {
 
     return html;
   }
+  console.log(co(function* (view, _context) {
+    let context = {};
+    assign(context, this.state);
+    assign(context, _context);
+
+    let html = yield* render(view, context);
+    this.type = 'html';
+    this.body = html;
+    return html;
+  }));
   app.context.react = co(function* (view, _context) {
     let context = {};
     assign(context, this.state);

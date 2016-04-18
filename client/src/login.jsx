@@ -16,7 +16,8 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import React, { Component, PropTypes, renderToString } from 'react';
+
+import React, { Component, PropTypes } from 'react';
 import { match, Router } from 'react-router';
 import { render } from 'react-dom';
 import { createHistory } from 'history';
@@ -129,9 +130,8 @@ class ReactLogin extends Component {
     );
   }
 }
-render(
+const app = render(
   <ReactLogin />,
   document.getElementById('app')
 );
-
-
+export app
