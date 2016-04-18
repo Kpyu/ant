@@ -41,7 +41,7 @@ const config = {
   },
   reactConfig: {
     root: Path.resolve(__dirname, '..', 'client', 'src'),
-    viewExt: 'jsx'
+    viewExt: '.jsx'
   },
   static: { // 静态资源目录配置
     directory: Path.resolve(__dirname, '..', 'dist')

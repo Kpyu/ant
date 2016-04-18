@@ -36,17 +36,17 @@ import assetsPipeLine from './middleware/assetsPipeLine';
 import router from './router';
 const app = new Koa();
 
-app.use(convert(bunyanLogger(logger, {
-  level: 'info',
-  timeLimit: 250
-})));
+// app.use(convert(bunyanLogger(logger, {
+//   level: 'info',
+//   timeLimit: 250
+// })));
 
 app.use(favicon(__dirname + '/client/favicon.ico'));
 
 // 添加webpack 中间件
-if (Config.env === 'development') {
-  Config.developmentMiddleWare(app);
-}
+// if (Config.env === 'development') {
+//   Config.developmentMiddleWare(app);
+// }
 
 // 添加ejs视图解析器
 render(app, Config.view);
@@ -54,7 +54,7 @@ app.context.render = co.wrap(app.context.render);
 
 // 添加react渲染器
 renderReact(app, Config.reactConfig);
-
+app.context.react = co.wrap(app.context.react);
 // 添加静态资源服务中间件
 app.use(serve(Config.static.directory));
 // 添加assets管道

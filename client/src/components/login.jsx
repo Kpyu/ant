@@ -16,10 +16,11 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-
 import React, { Component, PropTypes } from 'react';
 import { match, Router } from 'react-router';
 import { render } from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { createHistory } from 'history';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
@@ -27,7 +28,7 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import configureStore from './store/configureStore';
 
 /**
   组件的生命周期主要由三个部分组成：
@@ -68,9 +69,11 @@ const muiTheme = getMuiTheme({
     accent1Color: deepOrange500
   }
 });
+// Grab the state from a global injected into server-generated HTML
+const initialState = window.__INITIAL_STATE__;
+// Create Redux store with initial state
 
 class ReactLogin extends Component {
-
   constructor(props, context) {
     super(props, context);
     this.handleRequestClose = this.handleRequestClose.bind(this);
@@ -130,8 +133,13 @@ class ReactLogin extends Component {
     );
   }
 }
-const app = render(
-  <ReactLogin />,
-  document.getElementById('app')
+
+const store = configureStore(initialState);
+
+const rootElement = document.getElementById('root');
+render(
+  <Provider store={store}>
+    <ReactLogin />
+  </Provider>,
+ rootElement
 );
-export app

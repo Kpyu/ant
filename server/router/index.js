@@ -26,7 +26,7 @@ router.get('/', async (ctx, next) => {
 });
 
 router.get('/login', async (ctx, next) => {
-  await ctx.react('index');
+  await ctx.react('login');
 });
 
 

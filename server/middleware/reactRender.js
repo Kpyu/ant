@@ -2,7 +2,7 @@ import React from 'react';
 import path from 'path';
 import assign from 'object-assign';
 import co from 'co';
-
+import { renderToString } from 'react-dom/server';
 
 const beautifyHTML = require('js-beautify').html;
 const ReactDOMServer = require('react-dom/server');
@@ -27,8 +27,12 @@ export default function reactRender(app, settings) {
     });
   }
 
-  const moduleDetectRegEx = new RegExp('^' + settings.root);
-
+  // const moduleDetectRegEx = new RegExp('^' + settings.root);
+  // function renderApp(props, res) {
+  //   const markup = renderToString(<RoutingContext {...props}/>);
+  //   const html = createPage(markup);
+  //   write(html, 'text/html', res);
+  // }
   /**
    * Render html using view and props
    * @param {String} view 视图路径
@@ -42,6 +46,8 @@ export default function reactRender(app, settings) {
     let component = require(viewPath);
     // Transpiled ES6 may export components as { default: Component }
     component = component.default || component;
+
+
     html += ReactDOMServer.renderToStaticMarkup(
       React.createElement(component, props)
     );
@@ -63,8 +69,11 @@ export default function reactRender(app, settings) {
 
     return html;
   }
-  console.log(co(function* (view, _context) {
+  console.log('添加react渲染器');
+  console.log(JSON.stringify(app));
+  app.context.react = function* (view, _context) {
     let context = {};
+    console.log('_context', view);
     assign(context, this.state);
     assign(context, _context);
 
@@ -72,15 +81,5 @@ export default function reactRender(app, settings) {
     this.type = 'html';
     this.body = html;
     return html;
-  }));
-  app.context.react = co(function* (view, _context) {
-    let context = {};
-    assign(context, this.state);
-    assign(context, _context);
-
-    let html = yield* render(view, context);
-    this.type = 'html';
-    this.body = html;
-    return html;
-  });
+  };
 }

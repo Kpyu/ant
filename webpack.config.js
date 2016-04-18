@@ -46,13 +46,21 @@ function makeConfig(env) {
         bower: bowerDir,
         antd: path.resolve(nodeModulesDir, 'antd'),
         react: path.resolve(nodeModulesDir, 'react')
-      }
+      },
+      extensions: ['', '.js', '.jsx']
     },
     module: {
       noParse: [],
       loaders: [
         {
-          test: /\.jsx|\.js?$/,
+          test: /\.js?$/,
+          loader: 'babel',
+          query: {
+            presets: ['stage-0', 'es2015-node5', 'stage-3']
+          }
+        },
+        {
+          test: /\.jsx?$/,
           loader: 'babel',
           query: {
             presets: ['stage-0', 'es2015-node5', 'stage-3', 'react'],
@@ -63,7 +71,7 @@ function makeConfig(env) {
             },
             compact: false
           },
-          exclude: path.resolve('client')
+          exclude: /node_modules/
         },
         {
           test: /\.css$/,
