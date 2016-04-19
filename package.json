@@ -4,8 +4,8 @@
   "description": "a simple cms",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",// 启动node服务
-    "dev": "gulp static" // 启动webpackdevserver
+    "start":"node app.js",/*启动node服务*/ 
+    "dev": "gulp static" /*启动webpackdevserver*/ 
   },
   "repository": {
     "type": "git",
