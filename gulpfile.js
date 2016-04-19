@@ -11,10 +11,10 @@ const gutil = require('gulp-util');
 // Webpack
 const webpack = require('webpack');
 const webpackConf = require('./webpack.config');
+const WebpackDevServer = require('webpack-dev-server');
 
 
-
-gulp.task('default', function() {
+gulp.task('default', function () {
   return gulp.src(['*.js',
     'config/*.js', 'config/**/*.js',
     'client/js/common/*.js',
@@ -26,21 +26,39 @@ gulp.task('default', function() {
 
 
 // clears dist directory
-gulp.task('clean', function() {
+gulp.task('clean', function () {
   return gulp.src(['dist'], { read: true }).pipe(clean());
 });
 
-gulp.task('test', ['clean'], function(done) {
-  webpack(webpackConf('testing'), function(err, stats) {
+gulp.task('pack', ['clean'], function (done) {
+  webpack(webpackConf('testing'), function (err, stats) {
     if (err) throw new gutil.PluginError('webpack', err);
     gutil.log('[webpack]', stats.toString({ colors: true }));
     done();
   });
 });
 
+gulp.task('static', function (done) {
+  var config = webpackConf('development');
+  var compiler;
+  config.devtool = 'eval';
+  config.debug = true;
+  compiler = webpack(config);
+  new WebpackDevServer(compiler, {
+    stats: { colors: true },
+    hot: true,
+    contentBase: './dist/',
+    publicPath: '/antcms/',
+    inline: true,
+    lazy: false
+  }).listen(4000, '127.0.0.1', function (err) {
+    console.error(err);
+  });
+});
+
 
 // generate sprite.png and _sprite.scss
-gulp.task('sprites', function() {
+gulp.task('sprites', function () {
   return sprity.src({
     src: './client/img/icon/*.{png,jpg}',
     style: './sprite.css',

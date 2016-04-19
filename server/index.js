@@ -29,7 +29,7 @@ import render from 'koa-ejs';
 import co from 'co';
 import Boom from 'boom';
 import favicon from 'koa-favicon';
-import renderReact from './middleware/reactRender';
+import renderApp from './serverRender';
 import logger from './logger';
 import Config from '../config';
 import assetsPipeLine from './middleware/assetsPipeLine';
@@ -53,12 +53,16 @@ render(app, Config.view);
 app.context.render = co.wrap(app.context.render);
 
 // 添加react渲染器
-renderReact(app, Config.reactConfig);
-app.context.react = co.wrap(app.context.react);
+// renderReact(app, Config.reactConfig);
+// app.context.react = co.wrap(app.context.react);
+
+
 // 添加静态资源服务中间件
 app.use(serve(Config.static.directory));
-// 添加assets管道
 
+
+app.use(renderApp());
+// 添加assets管道
 app.use(assetsPipeLine({
   manifest: Path.join(__dirname, '..', 'manifest.json'),
   prepend: ''

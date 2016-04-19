@@ -1,6 +1,6 @@
-import Login from '../components/login.jsx';
+// import Login from '../components/login.jsx';
 export default {
-  path: '/login',
-  component: Login
+  path: '/login'
+  // component: Login
 };
 

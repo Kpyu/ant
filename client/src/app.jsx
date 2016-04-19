@@ -30,7 +30,7 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import configureStore from './store/configureStore';
+import configureStore from './store/configureStore.jsx';
 
 /**
   组件的生命周期主要由三个部分组成：
@@ -72,7 +72,7 @@ const muiTheme = getMuiTheme({
   }
 });
 // Grab the state from a global injected into server-generated HTML
-const initialState = window.__INITIAL_STATE__;
+const initialState = 'window.__INITIAL_STATE__';
 // Create Redux store with initial state
 
 class App extends Component {

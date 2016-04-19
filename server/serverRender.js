@@ -23,9 +23,9 @@ import { Provider } from 'react-redux';
 import Fs from 'fs';
 import configureStore from '../client/src/store/configureStore';
 import { RouterContext, match, createMemoryHistory } from 'react-router';
-import App from '../client/src/app.jsx';
-import routes from '../client/src/routes/RootRoute';
-
+// import App from '../client/src/app.jsx';
+import configureRoutes from '../client/src/routes';
+const isDev = process.env.NODE_ENV === 'development';
 const beautifyHTML = require('js-beautify').html;
 let DEFAULT_SETTINGS = {
   doctype: '<!DOCTYPE html>',
@@ -46,13 +46,16 @@ function renderFullPage(html, initialState) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
         </script>
-        <script src="/assets/app.js"></script>
+        <script src="http://127.0.0.1:4000/assets/vendor.js"></script>
+        <script src="http://127.0.0.1:4000/assets/app.js"></script>
       </body>
     </html>
     `;
 }
 function handleRender(ctx) {
   const store = configureStore();
+  const history = createMemoryHistory();
+  const routes = configureRoutes(history);
   const initialState = JSON.stringify(store.getState());
   // 参考react-router的官方示例编写的server, 使用react-router.match来匹配路由
   // 并用ReactDom.renderToString方法将对应的JSX文件渲染成HTML并且填入FullPage里.
@@ -63,22 +66,23 @@ function handleRender(ctx) {
     } else if (error) {
       ctx.status(500).send(error.message);
     } else if (renderProps === null) {
-      // not matching a route from the React routes
       ctx.status(404).send('Not Found');
     } else {
       const html = renderToString(
         <Provider store={store}>
           <RouterContext { ...renderProps } />
-        </Provider>
-      );
+        </Provider>);
       console.log(initialState);
       console.log('server state');
-      ctx.send(renderFullPage(html, initialState));
+      ctx.body = renderFullPage(html, initialState);
+      ctx.type = 'html';
     }
   });
 }
 
-export default function renderApp(ctx) {
-  ctx.body = handleRender(ctx);
-  ctx.type = 'html';
+export default function renderApp() {
+  return function render(ctx, next) {
+    // 这里要返回一个promise
+    handleRender(ctx);
+  };
 }

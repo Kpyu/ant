@@ -11,7 +11,8 @@ const hotMiddleWareScript = 'webpack-hot-middleware/client?' +
 const assetsPath = path.join(__dirname, 'dist', 'assets');
 const publicPathConfig = {
   production: 'url', // 这里配置cdn 地址
-  default: '/assets'
+  testing: '/assets/',
+  default: 'http://localhost:4000/antcms/assets'
 };
 
 function makeConfig(env) {
@@ -24,10 +25,9 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['event-source-polyfill', './client/src/app.jsx',
-          hotMiddleWareScript] : './client/src/app.jsx',
-      login: (envStr === 'development') ?
-        ['./client/src/login.jsx', hotMiddleWareScript] : './client/src/login.jsx',
+        ['event-source-polyfill', './client/src/app.jsx'] : './client/src/app.jsx',
+      // login: (envStr === 'development') ?
+      //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
         'antd',
         'react'
@@ -106,16 +106,16 @@ function makeConfig(env) {
       new webpack.NoErrorsPlugin(),
       new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-eval-source-map'
     // Server Configuration options
-    devServer: {
-      contentBase: 'client',  // Relative directory for base of server
-      devtool: 'eval',
-      hot: true,        // Live-reload
-      inline: true,
-      port: 3001,        // Port Number
-      host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
-    }
+    // devServer: {
+    //   contentBase: 'client',  // Relative directory for base of server
+    //   devtool: 'eval',
+    //   hot: true,        // Live-reload
+    //   inline: true,
+    //   port: 3001,        // Port Number
+    //   host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
+    // }
   };
   // generate manifest.json
   config.plugins.push(function () {

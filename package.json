@@ -4,7 +4,8 @@
   "description": "a simple cms",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start":"node app.js",// 启动node服务
+    "dev": "gulp static" // 启动webpackdevserver
   },
   "repository": {
     "type": "git",
@@ -67,6 +68,9 @@
     "react-slick": "^0.12.0",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.4.0",
+    "redux-form": "^5.1.0",
+    "redux-logger": "^2.6.1",
+    "redux-promise": "^0.5.3",
     "request": "^2.67.0",
     "serve-favicon": "^2.3.0",
     "wrench": "^1.5.8"
@@ -131,6 +135,7 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.12.15",
     "webpack-dev-middleware": "^1.5.1",
+    "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.10.0"
   }
 }
