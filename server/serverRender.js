@@ -60,7 +60,6 @@ function handleRender(ctx) {
   // 参考react-router的官方示例编写的server, 使用react-router.match来匹配路由
   // 并用ReactDom.renderToString方法将对应的JSX文件渲染成HTML并且填入FullPage里.
   match({ routes, location: ctx.url }, (error, redirectLocation, renderProps) => {
-    // would be valid when using redux-auth-wrapper?? or onEnter from react-router?
     if (redirectLocation) {
       ctx.redirect(301, redirectLocation.pathname + redirectLocation.search);
     } else if (error) {

@@ -25,12 +25,12 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['event-source-polyfill', './client/src/app.jsx'] : './client/src/app.jsx',
+        ['./client/src/app.jsx'] : './client/src/app.jsx',
       // login: (envStr === 'development') ?
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
-        'antd',
-        'react'
+        // 'antd',
+        // 'react'
       ]
     },
     output: {
@@ -56,7 +56,8 @@ function makeConfig(env) {
           test: /\.js?$/,
           loader: 'babel',
           query: {
-            presets: ['stage-0', 'es2015-node5', 'stage-3']
+            presets: ['stage-0', 'es2015-node5', 'stage-3'],
+            compact: false
           }
         },
         {
@@ -106,7 +107,7 @@ function makeConfig(env) {
       new webpack.NoErrorsPlugin(),
       new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
-    devtool: 'cheap-module-eval-source-map'
+    devtool: 'inline-source-map'
     // Server Configuration options
     // devServer: {
     //   contentBase: 'client',  // Relative directory for base of server

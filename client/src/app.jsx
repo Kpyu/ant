@@ -19,7 +19,7 @@
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
 import React, { Component, PropTypes } from 'react';
-import { match, Router } from 'react-router';
+import { browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -30,8 +30,11 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import configureStore from './store/configureStore.jsx';
 
+
+import Immutable from 'immutable';
+import installDevTools from 'immutable-devtools';
+installDevTools(Immutable);
 /**
   组件的生命周期主要由三个部分组成：
   Mounting：组件正在被插入DOM中
@@ -59,89 +62,24 @@ import configureStore from './store/configureStore.jsx';
   findDOMNode()：获取真实的DOM
   forceUpdate()：强制更新
 **/
-const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200
-  }
-};
+// Immutable dev tools makes for easier viewing of Maps and Lists in the
+// Chrome Developer tools.
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500
-  }
-});
-// Grab the state from a global injected into server-generated HTML
-const initialState = 'window.__INITIAL_STATE__';
-// Create Redux store with initial state
+import configureStore from './store/configureStore';
+import configureRoutes from './routes/';
 
-class App extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleTouchTap = this.handleTouchTap.bind(this);
+const history = browserHistory;
 
-    this.state = {
-      open: false
-    };
-  }
-  componentWillMount() {
-    console.log('执行登陆页渲染');
-  }
-  componentDidMount() {
-    console.log('登陆页渲染完成');
-  }
-  handleRequestClose() {
-    this.setState({
-      open: false
-    });
-  }
+const initialState = window.__INITIAL_STATE__;
 
-  handleTouchTap() {
-    this.setState({
-      open: true
-    });
-  }
-
-  render() {
-    const standardActions = (
-      <FlatButton
-        label="Ok"
-        secondary={true}
-        onTouchTap={this.handleRequestClose}
-        />
-    );
-
-    return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.container}>
-          <Dialog
-            open={this.state.open}
-            title="Super Secret Password"
-            actions={standardActions}
-            onRequestClose={this.handleRequestClose}
-            >
-            1-2-3-4-5
-          </Dialog>
-          <h1>material-ui</h1>
-          <h2>example project</h2>
-          <RaisedButton
-            label="Super Secret Password"
-            primary={true}
-            onTouchTap={this.handleTouchTap}
-            />
-        </div>
-      </MuiThemeProvider>
-    );
-  }
-}
+initialState.counter = Immutable.fromJS(initialState.counter);
 
 const store = configureStore(initialState);
 
 const rootElement = document.getElementById('root');
-render(
+
+render((
   <Provider store={store}>
-    <App />
-  </Provider>,
- rootElement
-);
+    {configureRoutes(history)}
+  </Provider>
+), rootElement);
