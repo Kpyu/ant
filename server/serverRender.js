@@ -46,8 +46,8 @@ function renderFullPage(html, initialState) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
         </script>
-        <script src="http://127.0.0.1:4000/assets/vendor.js"></script>
-        <script src="http://127.0.0.1:4000/assets/app.js"></script>
+        <script src="http://127.0.0.1:4000/antcms/vendor.js"></script>
+        <script src="http://127.0.0.1:4000/antcms/app.js"></script>
       </body>
     </html>
     `;

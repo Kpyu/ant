@@ -58,7 +58,8 @@ function makeConfig(env) {
           query: {
             presets: ['stage-0', 'es2015-node5', 'stage-3'],
             compact: false
-          }
+          },
+          exclude: /node_modules/
         },
         {
           test: /\.jsx?$/,

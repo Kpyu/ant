@@ -72,7 +72,7 @@ const history = browserHistory;
 
 const initialState = window.__INITIAL_STATE__;
 
-initialState.counter = Immutable.fromJS(initialState.counter);
+// initialState.counter = Immutable.fromJS({});
 
 const store = configureStore(initialState);
 

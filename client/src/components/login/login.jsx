@@ -38,82 +38,6 @@ const muiTheme = getMuiTheme({
     accent1Color: deepOrange500
   }
 });
-// // Grab the state from a global injected into server-generated HTML
-// const initialState = window.__INITIAL_STATE__;
-// // Create Redux store with initial state
-
-// class ReactLogin extends Component {
-//   constructor(props, context) {
-//     super(props, context);
-//     this.handleRequestClose = this.handleRequestClose.bind(this);
-//     this.handleTouchTap = this.handleTouchTap.bind(this);
-
-//     this.state = {
-//       open: false
-//     };
-//   }
-//   componentWillMount() {
-//     console.log('执行登陆页渲染');
-//   }
-//   componentDidMount() {
-//     console.log('登陆页渲染完成');
-//   }
-//   handleRequestClose() {
-//     this.setState({
-//       open: false
-//     });
-//   }
-
-//   handleTouchTap() {
-//     this.setState({
-//       open: true
-//     });
-//   }
-
-//   render() {
-//     const standardActions = (
-//       <FlatButton
-//         label="Ok"
-//         secondary={true}
-//         onTouchTap={this.handleRequestClose}
-//         />
-//     );
-
-//     return (
-//       <MuiThemeProvider muiTheme={muiTheme}>
-//         <div style={styles.container}>
-//           <Dialog
-//             open={this.state.open}
-//             title="Super Secret Password"
-//             actions={standardActions}
-//             onRequestClose={this.handleRequestClose}
-//             >
-//             1-2-3-4-5
-//           </Dialog>
-//           <h1>material-ui</h1>
-//           <h2>example project</h2>
-//           <RaisedButton
-//             label="Super Secret Password"
-//             primary={true}
-//             onTouchTap={this.handleTouchTap}
-//             />
-//         </div>
-//       </MuiThemeProvider>
-//     );
-//   }
-// }
-
-// const store = configureStore(initialState);
-
-// const rootElement = document.getElementById('root');
-// render(
-//   <Provider store={store}>
-//     <ReactLogin />
-//   </Provider>,
-//  rootElement
-// );
-
-
 function Login(props) {
   console.log(props);
   const {
@@ -147,14 +71,6 @@ function Login(props) {
             />
         </div>
       </MuiThemeProvider>
-      <label> Name </label>
-      <input type="text" placeholder="natac" { ...name } />
-      <label> Email </label>
-      <input type="email" placeholder="example@gmail.com" { ...email } />
-      <label> Password </label>
-      <input type="password" placeholder="secret" { ...password } />
-      <button type="submit" disabled={submitting}> Submit </button>
-      <button type="button" disabled={submitting} onClick={resetForm}> Clear Form </button>
     </form>
   );
 }
