@@ -42,7 +42,7 @@ let DEFAULT_SETTINGS = {
 
 function renderFullPage(html, initialState) {
   let htmlStr = `<div id="root">${html}</div>
-              <script>
+              <script type="text/javascript">
                 window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
               </script>`;
   let tpl = renderTpl(path.resolve(__dirname, 'views', 'index.html'), {
@@ -51,7 +51,7 @@ function renderFullPage(html, initialState) {
     html: htmlStr
   });
   console.log('页面模板:', tpl);
-  return tpl;
+  return beautifyHTML(tpl, { indent_size: 2 });
   // return `
   //   <!doctype html>
   //   <html>

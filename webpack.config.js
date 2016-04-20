@@ -6,13 +6,15 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const bowerDir = path.join(__dirname, 'bower_components');
 const nodeModulesDir = path.join(__dirname, 'node_modules');
+
+// 热替换中间件暂时不用
 const hotMiddleWareScript = 'webpack-hot-middleware/client?' +
   'path=/__webpack_hmr&timeout=20000&reload=true';
 const assetsPath = path.join(__dirname, 'dist', 'assets');
 const publicPathConfig = {
   production: 'url', // 这里配置cdn 地址
   testing: '/assets/',
-  default: 'http://127.0.0.1:4000/antcms/assets/'
+  default: 'http://127.0.0.1:4000/antcms/assets'
 };
 
 function makeConfig(env) {
