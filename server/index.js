@@ -63,10 +63,10 @@ app.use(serve(Config.static.directory));
 
 app.use(renderApp());
 // 添加assets管道
-app.use(assetsPipeLine({
-  manifest: Path.join(__dirname, '..', 'manifest.json'),
-  prepend: ''
-}));
+// app.use(assetsPipeLine({
+//   manifest: Path.join(__dirname, '..', 'manifest.json'),
+//   prepend: ''
+// }));
 
 // 添加各种中间件
 app.use(bodyParser());

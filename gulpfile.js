@@ -48,7 +48,7 @@ gulp.task('static', function (done) {
     stats: { colors: true },
     hot: true,
     contentBase: './dist/',
-    publicPath: '/antcms/',
+    publicPath: config.output.publicPath,
     inline: true,
     lazy: false
   }).listen(4000, '127.0.0.1', function (err) {

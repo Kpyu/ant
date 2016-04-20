@@ -12,7 +12,7 @@ const assetsPath = path.join(__dirname, 'dist', 'assets');
 const publicPathConfig = {
   production: 'url', // 这里配置cdn 地址
   testing: '/assets/',
-  default: 'http://localhost:4000/antcms/assets'
+  default: 'http://127.0.0.1:4000/antcms/assets/'
 };
 
 function makeConfig(env) {
