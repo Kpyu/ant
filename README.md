@@ -23,6 +23,4 @@ a simple CMS
                          |   User       |          |   React   |               | Change  |
                          | interactions |◀-------- |   Views   |◀-------------| events  |
                          |______________|          |___________|               |_________|
-        
-        */
 
