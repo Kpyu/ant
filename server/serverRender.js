@@ -25,12 +25,8 @@ import path from 'path';
 import configureStore from '../client/src/store/configureStore';
 import { RouterContext, match, createMemoryHistory } from 'react-router';
 import renderTpl from './helper/assetsHelper';
-
 // import App from '../client/src/app.jsx';
 import configureRoutes from '../client/src/routes';
-
-
-
 const isDev = process.env.NODE_ENV === 'development';
 const beautifyHTML = require('js-beautify').html;
 let DEFAULT_SETTINGS = {
@@ -52,22 +48,6 @@ function renderFullPage(html, initialState) {
   });
   console.log('页面模板:', tpl);
   return beautifyHTML(tpl, { indent_size: 2 });
-  // return `
-  //   <!doctype html>
-  //   <html>
-  //     <head>
-  //       <title>Redux Universal Example</title>
-  //     </head>
-  //     <body>
-  //       <div id="root">${html}</div>
-  //       <script>
-  //         window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
-  //       </script>
-  //       <script src="http://127.0.0.1:4000/antcms/vendor.js"></script>
-  //       <script src="http://127.0.0.1:4000/antcms/app.js"></script>
-  //     </body>
-  //   </html>
-  //   `;
 }
 function handleRender(ctx) {
   const store = configureStore();
@@ -95,7 +75,6 @@ function handleRender(ctx) {
     }
   });
 }
-
 export default function renderApp() {
   return function render(ctx, next) {
     // 这里要返回一个promise
