@@ -8,9 +8,8 @@ import Login from '../components/Login/';
 export default function configureRoutes(history) {
   return (
     <Router history={history}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Hello} />
-      </Route>
+      <Route path="/" component={App} />
+      <Route path="/hello" component={Hello} />
       <Route path="/login" component={Login} />
     </Router>
   );

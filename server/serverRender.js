@@ -39,7 +39,7 @@ let DEFAULT_SETTINGS = {
 function renderFullPage(html, initialState) {
   let htmlStr = `<div id="root">${html}</div>
               <script type="text/javascript">
-                window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+                window.__INITIAL_STATE__ = ${initialState}
               </script>`;
   let tpl = renderTpl(path.resolve(__dirname, 'views', 'index.html'), {
     manifest: path.join(__dirname, '..', 'manifest.json'),
