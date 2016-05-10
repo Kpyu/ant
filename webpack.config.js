@@ -27,7 +27,7 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ?
-        ['./client/src/app.jsx'] : './client/src/app.jsx',
+        ['webpack-dev-server/client?http://127.0.0.1:4000/', 'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
       // login: (envStr === 'development') ?
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
@@ -70,7 +70,17 @@ function makeConfig(env) {
             presets: ['stage-0', 'es2015-node5', 'stage-3', 'react'],
             env: {
               development: {
-                presets: ['react-hmre']
+                plugins: [['react-transform', {
+                  transforms: [{
+                    transform: 'react-transform-hmr',
+                    // if you use React Native, pass "react-native" instead:
+                    imports: ['react'],
+                    // this is important for Webpack HMR:
+                    locals: ['module']
+                  }]
+                  // note: you can put more transforms into array
+                  // this is just one of them!
+                }]]
               }
             },
             compact: false
@@ -98,17 +108,16 @@ function makeConfig(env) {
     postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
+      // new webpack.optimize.OccurenceOrderPlugin(),
+      // new webpack.NoErrorsPlugin(),
       new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
         '[name]-[chunkhash].css' : '[name].css'),
       new webpack.ProvidePlugin({
         react: 'exports?window.react!react'
       }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.NoErrorsPlugin(),
-      new webpack.ContextReplacementPlugin(/.*$/, /a^/)
+      // new webpack.optimize.DedupePlugin(),
+      // new webpack.NoErrorsPlugin(),
+      // new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
     devtool: 'inline-source-map'
     // Server Configuration options

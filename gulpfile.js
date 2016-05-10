@@ -16,24 +16,29 @@ const WebpackDevServer = require('webpack-dev-server');
 
 gulp.task('default', function () {
   return gulp.src(['*.js',
-    'config/*.js', 'config/**/*.js',
-    'client/js/common/*.js',
-    'client/js/*.js',
-    'libs/*.js'])
-    .pipe(jscs())
-    .pipe(jscs.reporter());
+        'config/*.js', 'config/**/*.js',
+        'client/js/common/*.js',
+        'client/js/*.js',
+        'libs/*.js'
+    ])
+        .pipe(jscs())
+        .pipe(jscs.reporter());
 });
 
 
 // clears dist directory
 gulp.task('clean', function () {
-  return gulp.src(['dist'], { read: true }).pipe(clean());
+  return gulp.src(['dist'], {
+    read: true
+  }).pipe(clean());
 });
 
 gulp.task('pack', ['clean'], function (done) {
   webpack(webpackConf('testing'), function (err, stats) {
     if (err) throw new gutil.PluginError('webpack', err);
-    gutil.log('[webpack]', stats.toString({ colors: true }));
+    gutil.log('[webpack]', stats.toString({
+      colors: true
+    }));
     done();
   });
 });
@@ -41,11 +46,14 @@ gulp.task('pack', ['clean'], function (done) {
 gulp.task('static', function (done) {
   var config = webpackConf('development');
   var compiler;
-  config.devtool = 'eval';
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.devtool = 'eval-inline';
   config.debug = true;
   compiler = webpack(config);
   new WebpackDevServer(compiler, {
-    stats: { colors: true },
+    stats: {
+      colors: true
+    },
     hot: true,
     contentBase: './dist/',
     publicPath: config.output.publicPath,
@@ -65,10 +73,10 @@ gulp.task('sprites', function () {
     cssPath: '../../less/',
     margin: 0,
 
-    // ... other optional options
-    // for example if you want to generate scss instead of css
-    // make sure you have installed sprity-sass
+        // ... other optional options
+        // for example if you want to generate scss instead of css
+        // make sure you have installed sprity-sass
     processor: 'css'
   })
-    .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
+ .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
 });
