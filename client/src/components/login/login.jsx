@@ -20,87 +20,78 @@ import React, { Component, PropTypes } from 'react';
 import Promise from 'bluebird';
 import { withProps, compose } from 'recompose';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import ActionAndroid from 'material-ui/svg-icons/action/android';
+import FontIcon from 'material-ui/FontIcon';
+
+
+import { submit } from '../../actions/Action.jsx';
+
 const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200
+  button: {
+    margin: 12
+  },
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '100%',
+    opacity: 0
   }
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500
-  }
-});
-function Login(props) {
-  console.log(props);
-  const {
-    fields: { name, email, password },
-    handleSubmit,
-    resetForm,
-    submitting,
-    onSubmit
-  } = props;
-  const standardActions = (
-      <FlatButton
-        label="Ok"
-        secondary={true}
-        />
-    );
-  return (
-    <form onSubmit={handleSubmit(onSubmit) }>
-          <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.container}>
-          <Dialog
-            title="Super Secret Password"
-            actions={standardActions}
-            >
-            1-2-3-4-5
-          </Dialog>
-          <h1>material-ui</h1>
-          <h2>example project</h2>
-          <RaisedButton
-            label="Super Secret Password"
-            primary={true}
-            />
-        </div>
+class Login extends Component {
+  render() {
+    const { onSubmit } = this.props;
+    return (
+      <MuiThemeProvider muiTheme={getMuiTheme() }>
+        <RaisedButton
+          label="Github Link"
+          linkButton={true}
+          secondary={true}
+          style={styles.button}
+          onMouseDown = {onSubmit}
+          icon={<FontIcon className="muidocs-icon-custom-github" />}
+          />
       </MuiThemeProvider>
-    </form>
-  );
+    );
+  }
 }
 
-Login.propTypes = {
-  fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  resetForm: PropTypes.func.isRequried,
-  submitting: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func
-};
-
-function onSubmit(values) {
-  return new Promise((resolve, reject) => {
-    const { name, password, email } = values;
-    // login user to the redux store via actions
-    setTimeout(() => {
-      console.log(`Logged in user with name: ${name}, password: ${password} and email: ${email}`);
-      resolve();
-    }, 1000);
-  });
+// 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？
+function mapStateToProps(state) {
+  return {
+  };
 }
-// using compose lets me author the onSubmit function in the global scope and
-// then inject it into the component via props by using withProps()
-export default compose(
-  reduxForm({
-    form: 'login',
-    fields: ['name', 'email', 'password'],
-  }),
-  withProps(
-    { onSubmit }
-  ),
+// 哪些 action 创建函数是我们想要通过 props 获取的？
+function mapDispatchToProps(dispatch) {
+  return {
+    onSubmit: () => {
+      console.log('执行了点击提交事件');
+      dispatch(submit());
+    }
+  };
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(Login);
+// 你可以传递一个对象，而不是定义一个 `mapDispatchToProps`：
+// export default connect(mapStateToProps, CounterActionCreators)(Counter);
+
+// 或者如果你想省略 `mapDispatchToProps`，你可以通过传递一个 `dispatch` 作为一个 props：
+// export default connect(mapStateToProps)(Counter);
+
+// 想看到更多的方法，详细的 connect() 示例如下。
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired
+};

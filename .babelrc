@@ -5,11 +5,7 @@
     "react",
     "es2015"
   ],
-   "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  },
+  
   "plugins": [
     "check-es2015-constants",
     "transform-async-to-generator",
