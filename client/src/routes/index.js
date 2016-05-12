@@ -5,12 +5,9 @@ import App from '../containers/App';
 import Hello from '../components/Hello/';
 import Login from '../components/Login/';
 
-export default function configureRoutes(history) {
-  return (
-    <Router history={history}>
-      <Route path="/" component={App} />
+export default (
+  <Route path="/" component={App}>
+     <Route path="/login" component={Login} />
       <Route path="/hello" component={Hello} />
-      <Route path="/login" component={Login} />
-    </Router>
-  );
-}
+  </Route>
+);

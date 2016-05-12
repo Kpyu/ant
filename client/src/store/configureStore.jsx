@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers/';
-import DevTools from '../containers/devTools';
+import DevTools from '../containers/DevTools';
 import thunk from 'redux-thunk';
 const logger = createLogger({
   level: 'info',
@@ -20,12 +20,11 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
+    // window.devToolsExtension ? window.devToolsExtension() : undefined,
     compose(
       applyMiddleware(thunk, createLogger()),
-      applyMiddleware(thunk),
       DevTools.instrument()
     )
-    // applyMiddleware(...middlewares)
   );
 
   if (module.hot) {

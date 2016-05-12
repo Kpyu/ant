@@ -67,6 +67,9 @@ function makeConfig(env) {
           test: /\.jsx?$/,
           loader: 'babel',
           include: path.join(__dirname, 'client', 'src'),
+          plugins: [
+            'transform-class-properties'
+          ],
           query: {
             presets: ['es2015', 'react'],
             env: {

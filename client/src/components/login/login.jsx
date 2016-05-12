@@ -29,8 +29,7 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
-import Devtools from '../../containers/devtools';
-
+import Paper from 'material-ui/Paper';
 
 import { submit } from '../../actions/Action.jsx';
 
@@ -51,13 +50,21 @@ const styles = {
 };
 
 class Login extends Component {
+  static contextTypes = {
+    muiTheme: React.PropTypes.object.isRequired
+  };
+  // getChildContext(){
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme()
+  //   };
+  // }
   render() {
     const { onSubmit } = this.props;
-    console.log('哈哈');
     return (
       <div>
         <h1>登录</h1>
         <MuiThemeProvider muiTheme={getMuiTheme() }>
+          <Paper zDepth={1} />
           <RaisedButton
             label="Github Link"
             linkButton={true}
@@ -67,7 +74,6 @@ class Login extends Component {
             icon={<FontIcon className="muidocs-icon-custom-github" />}
             />
         </MuiThemeProvider>
-        <Devtools />
       </div>
 
     );

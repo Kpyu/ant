@@ -24,16 +24,12 @@ import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { createHistory } from 'history';
-// import RaisedButton from 'material-ui/RaisedButton';
-// import Dialog from 'material-ui/Dialog';
-// import { deepOrange500 } from 'material-ui/styles/colors';
-// import FlatButton from 'material-ui/FlatButton';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
+import { syncHistoryWithStore } from 'react-router-redux';
 import Immutable from 'immutable';
 import installDevTools from 'immutable-devtools';
+import configureStore from './store/configureStore';
+import configureRoutes from './routes/';
+import Root from './containers/Root';
 installDevTools(Immutable);
 /**
   组件的生命周期主要由三个部分组成：
@@ -65,21 +61,18 @@ installDevTools(Immutable);
 // Immutable dev tools makes for easier viewing of Maps and Lists in the
 // Chrome Developer tools.
 
-import configureStore from './store/configureStore';
-import configureRoutes from './routes/';
-
-const history = browserHistory;
 
 const initialState = window.__INITIAL_STATE__;
 
-// initialState.counter = Immutable.fromJS({});
-
 const store = configureStore(initialState);
 
-const rootElement = document.getElementById('root');
+const history = syncHistoryWithStore(browserHistory, store);
 
-render((
-  <Provider store={store}>
-    {configureRoutes(history)}
-  </Provider>
+
+// initialState.counter = Immutable.fromJS({});
+
+const rootElement = document.getElementById('root');
+render(
+  (
+   <Root store={store} history={history} />
 ), rootElement);
