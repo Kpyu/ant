@@ -48,34 +48,28 @@ const styles = {
     opacity: 0
   }
 };
-
 class Login extends Component {
-  static contextTypes = {
-    muiTheme: React.PropTypes.object.isRequired
-  };
-  // getChildContext(){
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme()
-  //   };
-  // }
+  static childContextTypes = {
+    muiTheme: PropTypes.object
+  }
+  getChildContext() {
+    return {
+      muiTheme: getMuiTheme()
+    };
+  }
+  handleTouchTap() {
+    alert('oh hi');
+  }
   render() {
     const { onSubmit } = this.props;
+    var a = [1, 2, 3];
+    var b = a.map((x) => x + 1);
     return (
-      <div>
-        <h1>登录</h1>
-        <MuiThemeProvider muiTheme={getMuiTheme() }>
-          <Paper zDepth={1} />
-          <RaisedButton
-            label="Github Link"
-            linkButton={true}
-            secondary={true}
-            style={styles.button}
-            onMouseDown = {onSubmit}
-            icon={<FontIcon className="muidocs-icon-custom-github" />}
-            />
-        </MuiThemeProvider>
+      <div className="commentBox">
+        <h1> Sum </h1>
+        Hello, world!I am a CommentBox.{ b }.Sucka
+        <RaisedButton label="Dood!" primary={true} onTouchTap={this.handleTouchTap} />
       </div>
-
     );
   }
 }

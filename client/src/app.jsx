@@ -28,8 +28,10 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Immutable from 'immutable';
 import installDevTools from 'immutable-devtools';
 import configureStore from './store/configureStore';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import configureRoutes from './routes/';
 import Root from './containers/Root';
+
 installDevTools(Immutable);
 /**
   组件的生命周期主要由三个部分组成：
@@ -72,6 +74,9 @@ const history = syncHistoryWithStore(browserHistory, store);
 // initialState.counter = Immutable.fromJS({});
 
 const rootElement = document.getElementById('root');
+
+injectTapEventPlugin();
+
 render(
   (
    <Root store={store} history={history} />
