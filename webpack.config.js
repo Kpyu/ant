@@ -26,8 +26,7 @@ function makeConfig(env) {
     context: __dirname,
     // 入口配置
     entry: {
-      app: (envStr === 'development') ?
-        ['webpack-dev-server/client?http://127.0.0.1:4000/', 'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
+      app: (envStr === 'development') ? ['webpack-dev-server/client?http://127.0.0.1:4000/', 'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
       // login: (envStr === 'development') ?
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
@@ -38,10 +37,8 @@ function makeConfig(env) {
     output: {
       publicPath: publicPath, // 打包发布路径
       path: assetsPath, // 源目录
-      filename: (envStr === 'production')
-        ? '[name]-[chunkhash].js' : '[name].js', // 目标文件名
-      chunkFilename: (envStr === 'production')
-        ? '[name]-[chunkhash].js' : '[name].js'
+      filename: (envStr === 'production') ? '[name]-[chunkhash].js' : '[name].js', // 目标文件名
+      chunkFilename: (envStr === 'production') ? '[name]-[chunkhash].js' : '[name].js'
     },
     resolve: {
       alias: {
@@ -53,79 +50,77 @@ function makeConfig(env) {
     },
     module: {
       noParse: [],
-      loaders: [
-        {
-          test: /\.js?$/,
-          loader: 'babel',
-          query: {
-            presets: ['stage-0', 'es2015-node5', 'stage-3'],
-            compact: false
-          },
-          exclude: /node_modules/
+      loaders: [{
+        test: /\.js?$/,
+        loader: 'babel',
+        include: path.join(__dirname, 'server'),
+        query: {
+          presets: ['stage-0', 'es2015-node5', 'stage-3'],
+          compact: false
         },
-        {
-          test: /\.jsx?$/,
-          loader: 'babel',
-          include: path.join(__dirname, 'client', 'src'),
-          plugins: [
-            'transform-class-properties'
-          ],
-          query: {
-            presets: ['es2015', 'react'],
-            env: {
-              development: {
-                presets: ['react-hmre']
-              }
+        exclude: /node_modules/
+      }, {
+        test: /\.jsx?$/,
+        loader: 'babel',
+        include: path.join(__dirname, 'client'),
+        plugins: [
+          'transform-class-properties'
+        ],
+        query: {
+          presets: ['react', 'es2015', 'stage-0'],
+          env: {
+            development: {
+              presets: ['react-hmre']
             }
-          },
-          exclude: /node_modules/
+          }
         },
-        {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract('style', 'css!postcss')
-        },
-        {
-          test: /\.less$/,
-          loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
-        },
-        {
-          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          loader: 'url-loader?limit=10000&minetype=application/font-woff'
-        },
-        {
-          test: /\.(jpg|jpeg|gif|png)$/i,
-          loader: 'file-loader'
-        }
-      ]
+        exclude: /node_modules/
+      }, {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      }, {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+      }, {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
+      }, {
+        test: /\.(jpg|jpeg|gif|png)$/i,
+        loader: 'file-loader'
+      }]
     },
-    postcss: [autoprefixer({ browsers: ['last 2 versions'] })],
+    postcss: [autoprefixer({
+      browsers: ['last 2 versions']
+    })],
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
       // new webpack.optimize.OccurenceOrderPlugin(),
       // new webpack.NoErrorsPlugin(),
       new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
         '[name]-[chunkhash].css' : '[name].css'),
       new webpack.ProvidePlugin({
         react: 'exports?window.react!react'
-      }),
+      })
       // new webpack.optimize.DedupePlugin(),
       // new webpack.NoErrorsPlugin(),
       // new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
     devtool: 'inline-source-map'
-    // Server Configuration options
-    // devServer: {
-    //   contentBase: 'client',  // Relative directory for base of server
-    //   devtool: 'eval',
-    //   hot: true,        // Live-reload
-    //   inline: true,
-    //   port: 3001,        // Port Number
-    //   host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
-    // }
+      // Server Configuration options
+      // devServer: {
+      //   contentBase: 'client',  // Relative directory for base of server
+      //   devtool: 'eval',
+      //   hot: true,        // Live-reload
+      //   inline: true,
+      //   port: 3001,        // Port Number
+      //   host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
+      // }
   };
   // generate manifest.json
-  config.plugins.push(function () {
-    this.plugin('done', function (stats) {
+  config.plugins.push(function() {
+    this.plugin('done', function(stats) {
       var assets = stats.toJson().assetsByChunkName;
       var assetName;
       var vendors;
@@ -138,7 +133,7 @@ function makeConfig(env) {
           if (typeof assets[i] === 'object' ||
             Object.prototype.toString.call(assets[i]) === '[object Array]') {
             console.log(assets[i]);
-            vendors.forEach(function (src, index) {
+            vendors.forEach(function(src, index) {
               vendors[index] = [publicPath, '/', src].join('');
               console.log(src);
             });
