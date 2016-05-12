@@ -77,10 +77,10 @@ function makeConfig(env) {
         exclude: /node_modules/
       }, {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+        loader: 'css!postcss'
       }, {
         test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+        loader: 'css!postcss!less'
       }, {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&minetype=application/font-woff'
@@ -98,8 +98,8 @@ function makeConfig(env) {
       }),
       // new webpack.optimize.OccurenceOrderPlugin(),
       // new webpack.NoErrorsPlugin(),
-      new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
-        '[name]-[chunkhash].css' : '[name].css'),
+      // new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
+      //   '[name]-[chunkhash].css' : '[name].css'),
       new webpack.ProvidePlugin({
         react: 'exports?window.react!react'
       })

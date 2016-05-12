@@ -32,6 +32,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import configureRoutes from './routes/';
 import Root from './containers/Root';
 
+import '../styles/app.less';
+
 installDevTools(Immutable);
 /**
   组件的生命周期主要由三个部分组成：

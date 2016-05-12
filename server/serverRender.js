@@ -46,7 +46,6 @@ function renderFullPage(html, initialState) {
     prepend: '',
     html: htmlStr
   });
-  console.log('页面模板:', tpl);
   return beautifyHTML(tpl, { indent_size: 2 });
 }
 function handleRender(ctx) {
@@ -68,8 +67,6 @@ function handleRender(ctx) {
         <Provider store={store}>
           <RouterContext { ...renderProps } />
         </Provider>);
-      console.log(initialState);
-      console.log('server state');
       ctx.body = renderFullPage(html, initialState);
       ctx.type = 'html';
     }

@@ -30,9 +30,10 @@ import FlatButton from 'material-ui/FlatButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
-
+import TextField from 'material-ui/TextField';
 import { submit } from '../../actions/Action.jsx';
 
+import './login.less';
 const styles = {
   button: {
     margin: 12
@@ -46,8 +47,27 @@ const styles = {
     left: 0,
     width: '100%',
     opacity: 0
+  },
+  paper: {
+    height: 400,
+    width: 600,
+    margin: 20,
+    textAlign: 'center',
+    display: 'block'
+  },
+  paperHeader: {
+    height: 120,
+    width: 600,
+    backgroundColor: '#00BCD4',
+    display: 'block'
+  },
+  h1: {
+    lineHeight: '120px',
+    color: '#fff',
+    textAlign: 'center'
   }
 };
+
 class Login extends Component {
   static childContextTypes = {
     muiTheme: PropTypes.object
@@ -65,11 +85,24 @@ class Login extends Component {
     var a = [1, 2, 3];
     var b = a.map((x) => x + 1);
     return (
-      <div className="commentBox">
-        <h1> Sum </h1>
-        Hello, world!I am a CommentBox.{ b }.Sucka
-        <RaisedButton label="Dood!" primary={true} onTouchTap={this.handleTouchTap} />
-      </div>
+      <Paper style={styles.paper} zDepth={1} >
+        <Paper style={styles.paperHeader} zDepth={1}>
+          <h1 style={styles.h1}>登录</h1>
+        </Paper>
+        <div className="commentBox">
+          <TextField
+            hintText="请输入用户名"
+            floatingLabelText="用户名"
+            multiLine={false}
+            />
+          <br />
+          <TextField
+            hintText="请输入密码"
+            floatingLabelText="密码"
+            type="password"
+            />
+        </div>
+      </Paper>
     );
   }
 }

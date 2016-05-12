@@ -57,13 +57,13 @@ export default function assetsHelper(path, opts) {
       Object.prototype.toString.call(files) === '[object Array]') {
       files.forEach(function (value, key) {
         if (/(.css)$/.test(value)) {
-          tmps.push(`<link ref="stylesheet" type="text/css" url="${value}"></link>`);
+          tmps.push(`<link ref="stylesheet" type="text/css" href="${value}">`);
           return;
         }
       });
     } else {
       if (/(.css)$/.test(files)) {
-        tmps.push(`<link ref="stylesheet" type="text/css" url="${files}"></link>`);
+        tmps.push(`<link ref="stylesheet" type="text/css" href="${files}">`);
       }
     }
     return tmps.join('');
@@ -93,7 +93,7 @@ export default function assetsHelper(path, opts) {
       Object.prototype.toString.call(files) === '[object Array]') {
       files.forEach(function (value, key) {
         if (/(.css)$/.test(value)) {
-          tmps.push(`<link ref="stylesheet" type="text/css" url="${value}"></link>`);
+          tmps.push(`<link ref="stylesheet" type="text/css" href="${value}">`);
           return;
         }
         if (/(.js)$/.test(value)) {
@@ -103,13 +103,13 @@ export default function assetsHelper(path, opts) {
       });
     } else {
       if (/(.css)$/.test(files)) {
-        tmps.push(`<link ref="stylesheet" type="text/css" url="${files}"></link>`);
+        tmps.push(`<link ref="stylesheet" type="text/css" href="${files}">`);
       }
       if (/(.js)$/.test(files)) {
         tmps.push(`<script typeof="text/javascript" src="${files}"></script>`);
       }
     }
-    return tmps.join('');
+    return tmps.join('\n');
   };
   renderData.html = opts.html;
   return ejs.render(tpl, renderData);
