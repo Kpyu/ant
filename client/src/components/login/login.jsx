@@ -56,7 +56,7 @@ class Login extends Component {
     console.log('哈哈');
     return (
       <div>
-        <h1>登录1</h1>
+        <h1>登录</h1>
         <MuiThemeProvider muiTheme={getMuiTheme() }>
           <RaisedButton
             label="Github Link"

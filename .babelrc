@@ -5,24 +5,16 @@
         "react",
         "es2015"
     ],
+
     // "env": {
-    //     // only enable it when process.env.NODE_ENV is 'development' or undefined
     //     "development": {
-    //         "plugins": [
-    //             [
-    //                 "react-transform", {
-    //                     "transforms": [{
-    //                         "transform": "react-transform-hmr",
-    //                         "imports": [
-    //                             "react"
-    //                         ],
-    //                         "locals": [
-    //                             "module"
-    //                         ]
-    //                     }]
-    //                 }
-    //             ]
-    //         ]
+    //     "plugins": [["react-transform", {
+    //         "transforms": [{
+    //         "transform": "react-transform-hmr",
+    //         "imports": ["react"],
+    //         "locals": ["module"]
+    //         }]
+    //     }]]
     //     }
     // },
     "plugins": [

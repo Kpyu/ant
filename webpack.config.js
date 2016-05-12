@@ -66,24 +66,14 @@ function makeConfig(env) {
         {
           test: /\.jsx?$/,
           loader: 'babel',
+          include: path.join(__dirname, 'client', 'src'),
           query: {
-            presets: ['stage-0', 'es2015-node5', 'stage-3', 'react'],
+            presets: ['es2015', 'react'],
             env: {
               development: {
-                plugins: [['react-transform', {
-                  transforms: [{
-                    transform: 'react-transform-hmr',
-                    // if you use React Native, pass "react-native" instead:
-                    imports: ['react'],
-                    // this is important for Webpack HMR:
-                    locals: ['module']
-                  }]
-                  // note: you can put more transforms into array
-                  // this is just one of them!
-                }]]
+                presets: ['react-hmre']
               }
-            },
-            compact: false
+            }
           },
           exclude: /node_modules/
         },
@@ -132,13 +122,11 @@ function makeConfig(env) {
   };
   // generate manifest.json
   config.plugins.push(function () {
-    console.log('配置信息');
     this.plugin('done', function (stats) {
       var assets = stats.toJson().assetsByChunkName;
       var assetName;
       var vendors;
       var i;
-      console.log(assets);
       for (i in assets) {
         if (assets.hasOwnProperty(i)) {
           assetName = i;

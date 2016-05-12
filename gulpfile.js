@@ -5,8 +5,7 @@ const jscs = require('gulp-jscs');
 const clean = require('gulp-clean');
 const changed = require('gulp-changed');
 const gutil = require('gulp-util');
-
-
+// const webpack = require('webpack-stream');
 
 // Webpack
 const webpack = require('webpack');
@@ -50,17 +49,30 @@ gulp.task('static', function (done) {
   config.devtool = 'eval-inline';
   config.debug = true;
   compiler = webpack(config);
+
+
+//   compiler.run(function(err, stats) {
+//     if (err) {
+//       throw new gutil.PluginError('webpack:build-dev', err);
+//     }
+//     gutil.log('[webpack:build-dev]', stats.toString({
+//       colors: true
+//     }));
+//     done();
+//   });
   new WebpackDevServer(compiler, {
     stats: {
       colors: true
     },
     hot: true,
-    contentBase: './dist/',
+    contentBase: './client/',
+    watchDelay: 300,
     publicPath: config.output.publicPath,
-    inline: true,
+    inline: false,
     lazy: false
   }).listen(4000, '127.0.0.1', function (err) {
-    console.error(err);
+    if (err) throw new gutil.PluginError('webpack-dev-server', err);
+    gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
   });
 });
 
