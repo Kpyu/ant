@@ -25,7 +25,6 @@ import path from 'path';
 import configureStore from '../client/src/store/configureStore';
 import { RouterContext, match, createMemoryHistory } from 'react-router';
 import renderTpl from './helper/assetsHelper';
-// import App from '../client/src/app.jsx';
 import configureRoutes from '../client/src/routes/configureRoutes';
 const isDev = process.env.NODE_ENV === 'development';
 const beautifyHTML = require('js-beautify').html;

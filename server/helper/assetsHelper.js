@@ -26,7 +26,6 @@ import fs from 'fs';
 export default function assetsHelper(path, opts) {
   // 读取模板文件
   let tpl = fs.readFileSync(path, 'utf8');
-  console.log('读取的模板');
   let renderData = {};
   if (typeof opts !== 'object') {
     throw new Error('`options` argument required');
@@ -57,13 +56,13 @@ export default function assetsHelper(path, opts) {
       Object.prototype.toString.call(files) === '[object Array]') {
       files.forEach(function (value, key) {
         if (/(.css)$/.test(value)) {
-          tmps.push(`<link ref="stylesheet" type="text/css" href="${value}">`);
+          tmps.push(`<link rel="stylesheet" type="text/css"="${value}" />`);
           return;
         }
       });
     } else {
       if (/(.css)$/.test(files)) {
-        tmps.push(`<link ref="stylesheet" type="text/css" href="${files}">`);
+        tmps.push(`<link rel="stylesheet" type="text/css" href="${files}">`);
       }
     }
     return tmps.join('');
@@ -93,7 +92,7 @@ export default function assetsHelper(path, opts) {
       Object.prototype.toString.call(files) === '[object Array]') {
       files.forEach(function (value, key) {
         if (/(.css)$/.test(value)) {
-          tmps.push(`<link ref="stylesheet" type="text/css" href="${value}">`);
+          tmps.push(`<link rel="stylesheet" type="text/css" href="${value}">`);
           return;
         }
         if (/(.js)$/.test(value)) {
@@ -103,7 +102,7 @@ export default function assetsHelper(path, opts) {
       });
     } else {
       if (/(.css)$/.test(files)) {
-        tmps.push(`<link ref="stylesheet" type="text/css" href="${files}">`);
+        tmps.push(`<link rel="stylesheet" type="text/css" href="${files}">`);
       }
       if (/(.js)$/.test(files)) {
         tmps.push(`<script typeof="text/javascript" src="${files}"></script>`);
@@ -114,5 +113,3 @@ export default function assetsHelper(path, opts) {
   renderData.html = opts.html;
   return ejs.render(tpl, renderData);
 }
-
-

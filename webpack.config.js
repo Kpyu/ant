@@ -13,7 +13,7 @@ const hotMiddleWareScript = 'webpack-hot-middleware/client?' +
 const assetsPath = path.join(__dirname, 'dist', 'assets');
 const publicPathConfig = {
   production: 'url', // 这里配置cdn 地址
-  testing: '/assets/',
+  testing: '/assets',
   default: 'http://127.0.0.1:4000/antcms/assets'
 };
 
@@ -26,12 +26,14 @@ function makeConfig(env) {
     context: __dirname,
     // 入口配置
     entry: {
-      app: (envStr === 'development') ? ['webpack-dev-server/client?http://127.0.0.1:4000/', 'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
+      app: (envStr === 'development') ? ['webpack-dev-server/client?http://127.0.0.1:4000/',
+      'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
       // login: (envStr === 'development') ?
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
-        // 'antd',
-        // 'react'
+        'antd',
+        'antd/style/index.less',
+        'react'
       ]
     },
     output: {
@@ -44,7 +46,8 @@ function makeConfig(env) {
       alias: {
         bower: bowerDir,
         antd: path.resolve(nodeModulesDir, 'antd'),
-        react: path.resolve(nodeModulesDir, 'react')
+        react: path.resolve(nodeModulesDir, 'react'),
+        style: path.resolve(__dirname, 'client', 'styles')
       },
       extensions: ['', '.js', '.jsx']
     },
@@ -59,7 +62,8 @@ function makeConfig(env) {
           compact: false
         },
         exclude: /node_modules/
-      }, {
+      },
+      {
         test: /\.jsx?$/,
         loader: 'babel',
         include: path.join(__dirname, 'client'),
@@ -67,7 +71,7 @@ function makeConfig(env) {
           'transform-class-properties'
         ],
         query: {
-          presets: ['react', 'es2015', 'stage-0'],
+          presets: ['es2015', 'stage-0', 'react'],
           env: {
             development: {
               presets: ['react-hmre']
@@ -75,16 +79,20 @@ function makeConfig(env) {
           }
         },
         exclude: /node_modules/
-      }, {
+      },
+      {
         test: /\.css$/,
-        loader: 'css!postcss'
-      }, {
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
+      },
+      {
         test: /\.less$/,
-        loader: 'css!postcss!less'
-      }, {
+        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+      },
+      {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&minetype=application/font-woff'
-      }, {
+      },
+      {
         test: /\.(jpg|jpeg|gif|png)$/i,
         loader: 'file-loader'
       }]
@@ -97,9 +105,9 @@ function makeConfig(env) {
         name: 'vendor'
       }),
       // new webpack.optimize.OccurenceOrderPlugin(),
-      // new webpack.NoErrorsPlugin(),
-      // new ExtractTextPlugin((envStr === 'production' || envStr === 'testing') ?
-      //   '[name]-[chunkhash].css' : '[name].css'),
+      new webpack.NoErrorsPlugin(),
+      new ExtractTextPlugin((envStr === 'production') ?
+        '[name]-[chunkhash].css' : '[name].css'),
       new webpack.ProvidePlugin({
         react: 'exports?window.react!react'
       })
@@ -108,19 +116,19 @@ function makeConfig(env) {
       // new webpack.ContextReplacementPlugin(/.*$/, /a^/)
     ],
     devtool: 'inline-source-map'
-      // Server Configuration options
-      // devServer: {
-      //   contentBase: 'client',  // Relative directory for base of server
-      //   devtool: 'eval',
-      //   hot: true,        // Live-reload
-      //   inline: true,
-      //   port: 3001,        // Port Number
-      //   host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
-      // }
+    // Server Configuration options
+    // devServer: {
+    //   contentBase: 'client',  // Relative directory for base of server
+    //   devtool: 'eval',
+    //   hot: true,        // Live-reload
+    //   inline: true,
+    //   port: 3001,        // Port Number
+    //   host: '127.0.0.1'  // Change to '0.0.0.0' for external facing server
+    // }
   };
   // generate manifest.json
-  config.plugins.push(function() {
-    this.plugin('done', function(stats) {
+  config.plugins.push(function () {
+    this.plugin('done', function (stats) {
       var assets = stats.toJson().assetsByChunkName;
       var assetName;
       var vendors;
@@ -129,11 +137,11 @@ function makeConfig(env) {
         if (assets.hasOwnProperty(i)) {
           assetName = i;
           vendors = assets[i];
-          console.log(assets[i]);
+          console.log('资源', assets[i]);
           if (typeof assets[i] === 'object' ||
             Object.prototype.toString.call(assets[i]) === '[object Array]') {
             console.log(assets[i]);
-            vendors.forEach(function(src, index) {
+            vendors.forEach(function (src, index) {
               vendors[index] = [publicPath, '/', src].join('');
               console.log(src);
             });

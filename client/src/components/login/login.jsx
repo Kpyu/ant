@@ -32,8 +32,6 @@ import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import { submit } from '../../actions/Action.jsx';
-
-import './login.less';
 const styles = {
   button: {
     margin: 12
