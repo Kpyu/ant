@@ -24,6 +24,7 @@
   "homepage": "https://github.com/Alex1512/AntCMS#readme",
   "dependencies": {
     "antd": "^1.0.0-beta.1",
+    "axios": "^0.11.0",
     "babel-core": "^6.7.2",
     "babel-plugin-transform-class-properties": "^6.8.0",
     "babel-polyfill": "^6.7.2",
@@ -153,6 +154,8 @@
     "webpack-stream": "^3.2.0"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "es2015"
+    ]
   }
 }
