@@ -41,7 +41,7 @@ const app = new Koa();
 //   timeLimit: 250
 // })));
 
-app.use(favicon(__dirname + '/client/favicon.ico'));
+app.use(favicon(Path.join(__dirname, '..', '/client/favicon.ico')));
 
 // 添加webpack 中间件
 // if (Config.env === 'development') {

@@ -31,7 +31,7 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import { submit } from '../../actions/Action.jsx';
+import { submit, typingName } from '../../actions/Login.jsx';
 const styles = {
   button: {
     margin: 12
@@ -70,13 +70,19 @@ class Login extends Component {
   static childContextTypes = {
     muiTheme: PropTypes.object
   }
+  constructor(props) {
+    super(props);
+    this.handleName = this.handleName.bind(this);
+  }
   getChildContext() {
     return {
       muiTheme: getMuiTheme()
     };
   }
-  handleTouchTap() {
-    alert('oh hi');
+  handleName() {
+    const { dispatch } = this.props;
+    console.log('执行输入用户名');
+    dispatch(typingName());
   }
   render() {
     const { onSubmit } = this.props;
@@ -92,6 +98,7 @@ class Login extends Component {
             hintText="请输入用户名"
             floatingLabelText="用户名"
             multiLine={false}
+            onChange={ this.handleName }
             />
           <br />
           <TextField
@@ -105,6 +112,11 @@ class Login extends Component {
   }
 }
 
+
+Login.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 // 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？
 function mapStateToProps(state) {
   return {
@@ -119,10 +131,7 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps)(Login);
 // 你可以传递一个对象，而不是定义一个 `mapDispatchToProps`：
 // export default connect(mapStateToProps, CounterActionCreators)(Counter);
 
@@ -130,6 +139,4 @@ export default connect(
 // export default connect(mapStateToProps)(Counter);
 
 // 想看到更多的方法，详细的 connect() 示例如下。
-Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+
