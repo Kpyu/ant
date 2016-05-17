@@ -31,7 +31,7 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import { submit, typingName } from '../../actions/Login.jsx';
+import { doLogin, typingName } from '../../actions/Login.jsx';
 const styles = {
   button: {
     margin: 12
@@ -63,6 +63,9 @@ const styles = {
     lineHeight: '120px',
     color: '#fff',
     textAlign: 'center'
+  },
+  btn: {
+    marginTop: 10
   }
 };
 
@@ -73,19 +76,46 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.handleName = this.handleName.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handPassword = this.handPassword.bind(this);
   }
   getChildContext() {
     return {
       muiTheme: getMuiTheme()
     };
   }
-  handleName() {
-    const { dispatch } = this.props;
+  componentWillMount() {
+    this.setState({ error: { msg: '' } });
+  }
+  handleName(event) {
     console.log('执行输入用户名');
-    dispatch(typingName());
+    if (event.target.value) {
+      this.refs.userName.setState({ errorText: null });
+    }
+    this.setState({ userName: event.target.value });
+  }
+  handPassword(event) {
+    console.log('执行输入密码');
+    if (event.target.value) {
+      this.refs.password.setState({ errorText: null });
+    }
+    this.setState({ password: event.target.value });
+  }
+  handleSubmit() {
+    const { dispatch } = this.props;
+    const { userName, password } = this.state;
+    if (!userName) {
+      this.refs.userName.setState({ errorText: '用户名不能为空' });
+      return;
+    }
+    if (!password) {
+      this.refs.password.setState({ errorText: '密码不能为空' });
+      return;
+    }
+    dispatch(doLogin(userName, password));
   }
   render() {
-    const { onSubmit } = this.props;
+    const { error } = this.state;
     var a = [1, 2, 3];
     var b = a.map((x) => x + 1);
     return (
@@ -95,6 +125,7 @@ class Login extends Component {
         </Paper>
         <div className="commentBox">
           <TextField
+            ref="userName"
             hintText="请输入用户名"
             floatingLabelText="用户名"
             multiLine={false}
@@ -102,11 +133,19 @@ class Login extends Component {
             />
           <br />
           <TextField
+            ref="password"
             hintText="请输入密码"
             floatingLabelText="密码"
+            onChange = {this.handPassword}
             type="password"
             />
         </div>
+        <RaisedButton
+          label="登录"
+          primary={true}
+          style={styles.btn}
+          onMouseDown={this.handleSubmit}
+          />
       </Paper>
     );
   }
@@ -114,13 +153,11 @@ class Login extends Component {
 
 
 Login.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 // 哪些 Redux 全局的 state 是我们组件想要通过 props 获取的？
 function mapStateToProps(state) {
-  return {
-  };
+  return {};
 }
 // 哪些 action 创建函数是我们想要通过 props 获取的？
 function mapDispatchToProps(dispatch) {

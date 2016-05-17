@@ -6,16 +6,16 @@ function doTypingName() {
   return { type: 'NAME_TYPING' };
 }
 
-function doLogin() {
-  return { type: 'fetching' };
+function beginLogin() {
+  return { type: 'LOGIN_ING' };
 }
 
 function loginSuccess(data) {
-  return { type: 'success', success: data };
+  return { type: 'LOGIN_SUCCESS', success: data };
 }
 
 function receiveError(error) {
-  return { type: 'falied', fail: error };
+  return { type: 'LOGIN_FAILED', fail: error };
 }
 
 
@@ -32,9 +32,9 @@ export function typingName() {
   };
 }
 
-export function login() {
+export function doLogin() {
   return (dispatch) => {
-    dispatch(doLogin());
+    dispatch(beginLogin());
     return request({
       url: '/dologin',
       timeout: 20000,
