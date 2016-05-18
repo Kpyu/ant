@@ -70,6 +70,7 @@ app.use(renderApp());
 
 // 添加各种中间件
 app.use(bodyParser());
+
 // 注册路由
 app.use(router.routes());
 

@@ -19,8 +19,11 @@
 import Crypto from 'crypto';
 
 
-export default class UserController {
-  static login(ctx) {
+async function list(ctx) {
+  ctx.body = [];
+}
 
-  }
+export default function (router) {
+  console.log('进入登录');
+  router.post('/doLogin', list);
 }
