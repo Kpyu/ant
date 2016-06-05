@@ -27,7 +27,7 @@ import Mongoose, {
   Schema
 } from 'mongoose';
 import Util from '../../../helper';
-const UserSchema = new Schema({
+export const UserSchema = new Schema({
   id: {
     type: String,
     index: true,

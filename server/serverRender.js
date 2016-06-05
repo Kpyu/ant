@@ -73,7 +73,11 @@ function handleRender(ctx) {
 }
 export default function renderApp() {
   return function render(ctx, next) {
-    // 这里要返回一个promise
+    if (ctx.url.indexOf('admin') >= 0) {
+      // 这里要返回一个promise
+      next();
+      return;
+    }
     handleRender(ctx);
   };
 }

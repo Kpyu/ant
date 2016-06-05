@@ -1,9 +1,12 @@
-async function doLogin(ctx) {
-  console.log('执行登录...');
-  ctx.type = 'json';
-  ctx.body = { success: true };
+import { User } from '../models';
+function data() {
+  return { success: true };
 }
-export default function (router) {
+export function doLogin(router) {
   console.log('进入登录');
-  router.use('/admin/doLogin', doLogin);
+  router.post('/admin/doLogin', function (ctx, next) {
+    console.log(ctx);
+    ctx.body = data();
+    next();
+  });
 }

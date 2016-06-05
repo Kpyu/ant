@@ -32,13 +32,19 @@ export function typingName() {
   };
 }
 
-export function doLogin() {
+export function doLogin(userName, password) {
+  debugger
   return (dispatch) => {
     dispatch(beginLogin());
     return request({
-      url: '/dologin',
+      url: '/admin/doLogin',
       timeout: 20000,
       method: 'post',
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
+      params: {
+        userName: userName,
+        password: password
+      },
       responseType: 'json'
     }).
       then(function (response) {

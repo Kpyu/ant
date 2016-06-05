@@ -16,11 +16,11 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-// import koaRouter from 'koa-router';
-import Router from 'koa-66';
+import koaRouter from 'koa-router';
+// import Router from 'koa-66';
 import { initController } from '../api/Admin';
 // 路由基本用法
-const router = new Router();
+const router = koaRouter();
 router.get('/', async (ctx, next) => {
   await ctx.render('index');
 });

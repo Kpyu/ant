@@ -29,22 +29,24 @@ import render from 'koa-ejs';
 import co from 'co';
 import Boom from 'boom';
 import favicon from 'koa-favicon';
+import mongoose from 'mongoose';
 import renderApp from './serverRender';
 import logger from './logger';
 import Config from '../config';
 import assetsPipeLine from './middleware/assetsPipeLine';
 import router from './router';
 const app = new Koa();
-
+const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // app.use(convert(bunyanLogger(logger, {
 //   level: 'info',
 //   timeLimit: 250
 // })));
+mongoose.connect(mongoDB);
 
 app.use(favicon(Path.join(__dirname, '..', '/client/favicon.ico')));
 
 // 添加webpack 中间件
-// if (Config.env === 'development') {
+// if (Config.env ===  'development') {
 //   Config.developmentMiddleWare(app);
 // }
 
@@ -73,7 +75,7 @@ app.use(bodyParser());
 
 // 注册路由
 app.use(router.routes());
-
+app.use(router.allowedMethods());
 app.listen(Config.port, function () {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);
 });

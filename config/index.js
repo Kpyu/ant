@@ -21,10 +21,13 @@ import webpack from 'webpack';
 import { devMiddleware, hotMiddleware } from 'koa-webpack-middleware';
 const port = process.env.PORT || 3000;
 const DEBUG = process.env.NODE_ENV === 'development';
-
+function configEnv(name) {
+  return require('./' + (process.env.NODE_ENV || 'development') + '/' + name);
+}
 const config = {
   name: 'AntCMS', // 项目名
   DEBUG: DEBUG,
+  mongoUrl: configEnv('env').mongoUrl,
   env: process.env.NODE_ENV || 'development',
   port: port, // 监听端口
   session: { // session 配置

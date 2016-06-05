@@ -24,7 +24,7 @@ export function login() {
   return (dispatch) => {
     dispatch(doLogin());
     return request({
-      url: '/dologin',
+      url: '/admin/doLogin',
       timeout: 20000,
       method: 'post',
       responseType: 'json'
