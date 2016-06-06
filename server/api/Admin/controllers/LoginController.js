@@ -1,11 +1,13 @@
-import { User } from '../models';
-function data() {
-  return { success: true };
+import { UserModel } from '../models';
+function data(isLogin) {
+  return { success: isLogin };
 }
 export function doLogin(router) {
-  console.log('进入登录');
   router.post('/doLogin', function (ctx, next) {
-    console.log(ctx);
-    ctx.body = data();
+    console.log('获取参数', ctx.request.body);
+    let { userName, password } = ctx.request.body;
+    UserModel.checkLogin(userName, password, isLogin => {
+      ctx.body = data(isLogin);
+    });
   });
 }
