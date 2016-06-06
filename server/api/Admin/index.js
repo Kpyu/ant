@@ -1,5 +1,8 @@
+import koaRouter from 'koa-router';
 import { registerControllers } from './controllers';
-export function initController (router) {
-  console.log('注册路由', router);
-  return registerControllers(router);
+const router = koaRouter();
+export function initController () {
+  router.prefix('/admin');
+  registerControllers(router);
+  return router;
 }

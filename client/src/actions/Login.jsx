@@ -33,7 +33,6 @@ export function typingName() {
 }
 
 export function doLogin(userName, password) {
-  debugger
   return (dispatch) => {
     dispatch(beginLogin());
     return request({
@@ -41,7 +40,7 @@ export function doLogin(userName, password) {
       timeout: 20000,
       method: 'post',
       headers: { 'X-Requested-With': 'XMLHttpRequest' },
-      params: {
+      data: {
         userName: userName,
         password: password
       },

@@ -16,15 +16,16 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import koaRouter from 'koa-router';
+
 // import Router from 'koa-66';
 import { initController } from '../api/Admin';
-// 路由基本用法
-const router = koaRouter();
-router.get('/', async (ctx, next) => {
-  await ctx.render('index');
-});
+import render from '../serverRender';
+const router = initController();
 
-initController(router);
-
-module.exports = router;
+export default async (ctx, next) => {
+  if (ctx.path.match(/^\/admin/)) {
+    return await router.routes()(ctx, next);
+  }
+  console.log('访问链接', ctx);
+  return await render(ctx, next);
+};

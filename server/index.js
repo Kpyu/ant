@@ -63,7 +63,6 @@ app.context.render = co.wrap(app.context.render);
 app.use(serve(Config.static.directory));
 
 
-app.use(renderApp());
 // 添加assets管道
 // app.use(assetsPipeLine({
 //   manifest: Path.join(__dirname, '..', 'manifest.json'),
@@ -74,8 +73,8 @@ app.use(renderApp());
 app.use(bodyParser());
 
 // 注册路由
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(router);
+// app.use(router.allowedMethods());
 app.listen(Config.port, function () {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);
 });
