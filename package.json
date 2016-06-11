@@ -64,6 +64,7 @@
     "koa-views": "^5.0.1",
     "lodash": "^4.11.1",
     "material-ui": "^0.15.0-beta.1",
+    "moment": "^2.13.0",
     "mongoose": "^4.4.12",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",

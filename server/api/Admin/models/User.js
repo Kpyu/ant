@@ -16,34 +16,68 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import { UserSchema } from './schema/User.js';
-import mongoose from 'mongoose';
-const UserModel = mongoose.model('User', UserSchema);
-export default class User {
-  /**
-   * 查询用户列表
-   */
-  query(pageInfo, queryInfo) {
-
+import mongoose, { Schema } from 'mongoose';
+/**
+ * 用户模型
+ * @param {String} realName 昵称
+ * @param {String} email 邮箱
+ * @param {String} password 密码
+ * @param {String} createTime 创建日期
+ * */
+const userSchema = new Schema({
+  id: {
+    type: String,
+    index: true,
+    required: true,
+    trim: true
+  },
+  realName: {
+    type: String,
+    index: true,
+    required: true,
+    trim: true
+  },
+  account: {
+    type: String,
+    index: true,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    index: true,
+    required: false,
+    trim: true
+  },
+  password: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  createTime: Date,
+  isAdmin: {
+    type: String,
+    default: 0
   }
+});
+userSchema.statics = {
+  queryOne: userId => { },
   /**
-   * 查询单个用户
+   * 检测登录
    */
-  queryOne(userId) {
-    return this.UserModel.findOne(userId || 1);
-  }
-
-  checkLogin(name, password, callback) {
+  checkLogin: (name, password, callback) => {
     var query = { name: name, password: password };
-    console.log('用户model', UserModel.find({ }));
-    return this.userModel.user.count(query, function (err, doc) {
-      console.log('查询结果', doc);
-      console.log('查询错误', err);
-      if (doc === 1) {
-        callback(true);
-      } else {
-        callback(false);
-      }
-    });
+    
+    // return this.userModel.user.count(query, function (err, doc) {
+    //   console.log('查询结果', doc);
+    //   console.log('查询错误', err);
+    //   if (doc === 1) {
+    //     callback(true);
+    //   } else {
+    //     callback(false);
+    //   }
+    // });
   }
-}
+};
+
+export default userSchema;
