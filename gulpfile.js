@@ -70,7 +70,7 @@ gulp.task('static', function (done) {
     publicPath: config.output.publicPath,
     inline: false,
     lazy: false
-  }).listen(4040, '127.0.0.1', function (err) {
+  }).listen(4000, '127.0.0.1', function (err) {
     if (err) throw new gutil.PluginError('webpack-dev-server', err);
     gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
   });

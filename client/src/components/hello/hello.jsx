@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { defaultProps } from 'recompose';
 import { Link } from 'react-router';
-
+import Layout from '../Layout';
 function Hello(props) {
   console.log(props);
   return (
@@ -11,6 +11,7 @@ function Hello(props) {
       </div>
       <Link to="/login">Login</Link>
       <Link to="/profile">Profile</Link>
+      <Layout />
     </div>
   );
 }

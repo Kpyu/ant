@@ -67,7 +67,6 @@ userSchema.statics = {
    */
   checkLogin: (name, password, callback) => {
     var query = { name: name, password: password };
-    
     // return this.userModel.user.count(query, function (err, doc) {
     //   console.log('查询结果', doc);
     //   console.log('查询错误', err);
@@ -80,4 +79,4 @@ userSchema.statics = {
   }
 };
 
-export default userSchema;
+export default mongoose.model('User', userSchema);

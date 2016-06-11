@@ -36,7 +36,7 @@ let DEFAULT_SETTINGS = {
 };
 
 function renderFullPage(html, initialState) {
-  let htmlStr = `<div class="container">${html}</div>
+  let htmlStr = `<div class="layout-wrapper">${html}</div>
               <script type="text/javascript">
                 window.__INITIAL_STATE__ = ${initialState}
               </script>`;

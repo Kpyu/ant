@@ -1,2 +1,4 @@
 import User from './User';
-export const UserModel = new User();
+export {
+  User as User
+};
