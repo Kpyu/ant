@@ -10,6 +10,8 @@ class Layout extends Component {
     // this.setState({
     //   collapse: !this.state.collapse
     // });
+    // 触发action
+    
   }
   render() {
     const { collapse, children } = this.props;
