@@ -2,16 +2,23 @@ import { Menu, Breadcrumb, Icon } from 'antd';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+
+import actions from '../actions';
 // import styles from './Layout.less';
 const SubMenu = Menu.SubMenu;
 
 class Layout extends Component {
+  constructor(props) {
+    super(props);
+    this.onCollapseChange = this.onCollapseChange.bind(this);
+  }
   onCollapseChange() {
-    // this.setState({
-    //   collapse: !this.state.collapse
-    // });
-    // 触发action
-    
+    const { dispatch, collapse } = this.props;
+    if (collapse) {
+      dispatch(actions.menuCollapse());
+    } else {
+      dispatch(actions.menuOpen());
+    }
   }
   render() {
     const { collapse, children } = this.props;
@@ -65,13 +72,16 @@ class Layout extends Component {
   }
 }
 function mapStateToProps(state) {
-  return {};
+  return {
+    collapse: state.collapseＭenu.collapse
+  };
 }
 function mapDispatchToProps(dispatch) {
   return {};
 }
 Layout.propTypes = {
   collapse: PropTypes.bool.isRequired,
-  children: PropTypes.node
+  children: PropTypes.node,
+  dispatch: PropTypes.fun
 };
 export default connect(mapStateToProps)(Layout);
