@@ -15,7 +15,7 @@ export function menu(state = {}, action) {
     case actions.menuActions.MENU_LOADING:
       return Object.assign({}, state, { fetching: true, success: false });
     case actions.menuActions.MENU_LOADED:
-      return Object.assign({}, state, { fetching: false, success: false, menus: action.data });
+      return Object.assign({}, state, { fetching: false, success: false, menus: action.menus });
     default:
       return state;
   }

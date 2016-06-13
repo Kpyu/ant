@@ -3,6 +3,7 @@
     "name":"个人中心",
     "menuId":1,
     "level": 1,
+    "icon":"user",
     "children":[
 
     ]
@@ -11,6 +12,7 @@
     "name":"内容管理",
     "menuId":2,
     "level": 1,
+    "icon":"laptop",
     "children":[
 
     ]
@@ -18,6 +20,7 @@
   {
     "name":"模块管理",
     "menuId":3,
+    "icon":"folder",
     "level": 1,
     "children":[
 
@@ -25,34 +28,11 @@
   },
   {
     "name":"系统管理",
-    "menuId":1,
+    "menuId":4,
+    "icon":"setting",
     "level": 1,
     "children":[
 
     ]
   }
-  // {
-  //   "name":"个人中心",
-  //   "menuId":1,
-  //   "level": 1,
-  //   "children":[
-
-  //   ]
-  // },
-  // {
-  //   "name":"个人中心",
-  //   "menuId":1,
-  //   "level": 1,
-  //   "children":[
-
-  //   ]
-  // },
-  // {
-  //   "name":"个人中心",
-  //   "menuId":1,
-  //   "level": 1,
-  //   "children":[
-
-  //   ]
-  // }
 ]

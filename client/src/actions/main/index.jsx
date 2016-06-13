@@ -24,9 +24,24 @@ function beiginLoadMenu(params) {
   };
 }
 
+function menuLoaded(data) {
+  return {
+    type: menuActions.MENU_LOADED,
+    menus: data
+  };
+}
+
 export function menuLoad() {
   return dispatch => {
     dispatch(beiginLoadMenu());
-    // data = await dataApi.loadMenu()
+    console.log(dataApi);
+    dataApi.loadMenu()
+      .then(
+      function (result) {
+        dispatch(menuLoaded(result.data));
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
   };
 }
