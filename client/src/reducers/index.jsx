@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 
 import Login from './login';
-import { collapseＭenu } from './main';
+import { collapseＭenu, menu } from './main';
 
 const rootReducer = combineReducers(Object.assign(
   {
@@ -12,7 +12,8 @@ const rootReducer = combineReducers(Object.assign(
   {
     form: formReducer,
     login: Login,
-    collapseＭenu: collapseＭenu
+    collapseＭenu: collapseＭenu,
+    menu: menu
   }
 ));
 

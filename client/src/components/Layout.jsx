@@ -12,6 +12,10 @@ class Layout extends Component {
     super(props);
     this.onCollapseChange = this.onCollapseChange.bind(this);
   }
+  componentWillMount() {
+    const { dispatch } = this.props;
+    dispatch(actions.menuLoad());
+  }
   onCollapseChange() {
     const { dispatch, collapse } = this.props;
     if (collapse) {
@@ -82,6 +86,7 @@ function mapDispatchToProps(dispatch) {
 Layout.propTypes = {
   collapse: PropTypes.bool.isRequired,
   children: PropTypes.node,
-  dispatch: PropTypes.fun
+  dispatch: PropTypes.func,
+  menus: PropTypes.array.isRequired
 };
 export default connect(mapStateToProps)(Layout);

@@ -1,0 +1,58 @@
+[
+  {
+    "name":"个人中心",
+    "menuId":1,
+    "level": 1,
+    "children":[
+
+    ]
+  },
+  {
+    "name":"内容管理",
+    "menuId":2,
+    "level": 1,
+    "children":[
+
+    ]
+  },
+  {
+    "name":"模块管理",
+    "menuId":3,
+    "level": 1,
+    "children":[
+
+    ]
+  },
+  {
+    "name":"系统管理",
+    "menuId":1,
+    "level": 1,
+    "children":[
+
+    ]
+  }
+  // {
+  //   "name":"个人中心",
+  //   "menuId":1,
+  //   "level": 1,
+  //   "children":[
+
+  //   ]
+  // },
+  // {
+  //   "name":"个人中心",
+  //   "menuId":1,
+  //   "level": 1,
+  //   "children":[
+
+  //   ]
+  // },
+  // {
+  //   "name":"个人中心",
+  //   "menuId":1,
+  //   "level": 1,
+  //   "children":[
+
+  //   ]
+  // }
+]

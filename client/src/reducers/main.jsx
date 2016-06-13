@@ -10,3 +10,14 @@ export function collapseＭenu(state = { collapse: false }, action) {
   }
 }
 
+export function menu(state = {}, action) {
+  switch (action.type) {
+    case actions.menuActions.MENU_LOADING:
+      return Object.assign({}, state, { fetching: true, success: false });
+    case actions.menuActions.MENU_LOADED:
+      return Object.assign({}, state, { fetching: false, success: false, menus: action.data });
+    default:
+      return state;
+  }
+}
+
