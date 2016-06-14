@@ -31,7 +31,7 @@ function makeConfig(env) {
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
         'antd',
-        'antd/style/index.less',
+        path.join('antd', 'style', 'index.less'),
         'react'
       ]
     },
