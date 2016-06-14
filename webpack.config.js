@@ -4,7 +4,6 @@ const fs = require('fs');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const bowerDir = path.join(__dirname, 'bower_components');
 const nodeModulesDir = path.join(__dirname, 'node_modules');
 
 // 热替换中间件暂时不用
@@ -44,7 +43,6 @@ function makeConfig(env) {
     },
     resolve: {
       alias: {
-        bower: bowerDir,
         antd: path.resolve(nodeModulesDir, 'antd'),
         react: path.resolve(nodeModulesDir, 'react'),
         style: path.resolve(__dirname, 'client', 'styles')
