@@ -17,13 +17,21 @@
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
 import Crypto from 'crypto';
+import { UserModel } from '../models';
 
+export function userList(router) {
+  router.post('/user/list', function (ctx, next) { 
 
-async function list(ctx) {
-  ctx.body = [];
+  });
 }
 
-export default function (router) {
-  console.log('进入登录');
-  router.post('/doLogin', list);
+export function getUserByUsername(router) {
+  router.post('/user/getUserByUsername', function (ctx, next) { 
+
+  });
+}
+export function addUser(router) {
+  router.post('/user/getUserByUsername', function (ctx, next) { 
+
+  });
 }

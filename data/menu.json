@@ -5,7 +5,18 @@
     "level": 1,
     "icon":"user",
     "children":[
-
+      {
+        "name": "测试",
+        "menuId":101,
+        "level": 2,
+        "icon":"user"
+      },
+      {
+        "name": "测试",
+        "menuId":102,
+        "level": 2,
+        "icon":"user"
+      }
     ]
   },
   {
@@ -14,7 +25,18 @@
     "level": 1,
     "icon":"laptop",
     "children":[
-
+      {
+        "name": "测试",
+        "menuId":201,
+        "level": 2,
+        "icon":"user"
+      },
+      {
+        "name": "测试",
+        "menuId":202,
+        "level": 2,
+        "icon":"user"
+      }
     ]
   },
   {
@@ -23,7 +45,18 @@
     "icon":"folder",
     "level": 1,
     "children":[
-
+      {
+        "name": "测试",
+        "menuId":301,
+        "level": 2,
+        "icon":"user"
+      },
+      {
+        "name": "测试",
+        "menuId":302,
+        "level": 2,
+        "icon":"user"
+      }
     ]
   },
   {
@@ -32,7 +65,20 @@
     "icon":"setting",
     "level": 1,
     "children":[
-
+      {
+        "name": "用户管理",
+        "menuId":401,
+        "level": 2,
+        "url":"/manage/user",
+        "icon":"user"
+      },
+      {
+        "name": "角色管理",
+        "menuId":402,
+        "level": 2,
+        "url":"/manage/userGroup",
+        "icon":"user"
+      }
     ]
   }
 ]

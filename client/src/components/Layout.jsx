@@ -11,6 +11,7 @@ class Layout extends Component {
   constructor(props) {
     super(props);
     this.onCollapseChange = this.onCollapseChange.bind(this);
+    this.menuSelect = this.menuSelect.bind(this);
   }
   componentWillMount() {
     const { dispatch } = this.props;
@@ -24,20 +25,42 @@ class Layout extends Component {
       dispatch(actions.menuOpen());
     }
   }
+  menuSelect(obj) {
+    debugger;
+  }
+  renderInnerMenu(items) {
+    return (
+      items.map(function (child) {
+        return (
+          <Menu.Item key={child.url}>
+            <Icon type={child.icon} />
+            <span className="nav-text">{ child.name }</span>
+          </Menu.Item>
+        );
+      })
+    );
+  }
+
   render() {
     const { collapse, children, menus } = this.props;
+    const { renderInnerMenu } = this;
     return (
       <div className={collapse ? 'ant-layout-aside ant-layout-aside-collapse' : 'ant-layout-aside'}>
         <aside className="ant-layout-sider">
           <div className="ant-layout-logo"></div>
-          <Menu mode="inline" theme="dark" defaultSelectedKeys={['user']}>
+          <Menu mode="inline" theme="dark" defaultSelectedKeys={['user']} onSelect={this.menuSelect}>
             {
               menus ?
                 menus.map(function (menuItem) {
                   return (
-                    <Menu.Item key={menuItem.icon}>
-                      <Icon type={menuItem.icon} /><span className="nav-text">{ menuItem.name }</span>
-                    </Menu.Item>);
+                    <SubMenu key={menuItem.icon} title={
+                      <span>
+                        <Icon type={menuItem.icon} />
+                        <span className="nav-text">{ menuItem.name }</span>
+                      </span>
+                    }>
+                      { renderInnerMenu(menuItem.children) }
+                    </SubMenu>);
                 }) :
                 (<div></div>)
             }
