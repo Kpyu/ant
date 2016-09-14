@@ -26,7 +26,7 @@ function makeConfig(env) {
     // 入口配置
     entry: {
       app: (envStr === 'development') ? ['webpack-dev-server/client?http://127.0.0.1:4000/',
-      'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
+        'webpack/hot/dev-server', './client/src/app.jsx'] : './client/src/app.jsx',
       // login: (envStr === 'development') ?
       //   ['./client/src/login.jsx'] : './client/src/login.jsx',
       vendor: [
@@ -47,7 +47,7 @@ function makeConfig(env) {
         react: path.resolve(nodeModulesDir, 'react'),
         style: path.resolve(__dirname, 'client', 'styles')
       },
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js', '.jsx', '.ts', 'tsx']
     },
     module: {
       noParse: [],
@@ -61,39 +61,43 @@ function makeConfig(env) {
         },
         exclude: /node_modules/
       },
-      {
-        test: /\.jsx?$/,
-        loader: 'babel',
-        include: path.join(__dirname, 'client'),
-        plugins: [
-          'transform-class-properties'
-        ],
-        query: {
-          presets: ['es2015', 'stage-0', 'react'],
-          env: {
-            development: {
-              presets: ['react-hmre']
-            }
-          }
+        {
+          test: /\.tsx?$/,
+          loader: 'ts'
         },
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=10000&minetype=application/font-woff'
-      },
-      {
-        test: /\.(jpg|jpeg|gif|png)$/i,
-        loader: 'file-loader'
-      }]
+        {
+          test: /\.jsx?$/,
+          loader: 'babel',
+          include: path.join(__dirname, 'client'),
+          plugins: [
+            'transform-class-properties'
+          ],
+          query: {
+            presets: ['es2015', 'stage-0', 'react'],
+            env: {
+              development: {
+                presets: ['react-hmre']
+              }
+            }
+          },
+          exclude: /node_modules/
+        },
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract('style', 'css!postcss')
+        },
+        {
+          test: /\.less$/,
+          loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
+        },
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          loader: 'url-loader?limit=10000&minetype=application/font-woff'
+        },
+        {
+          test: /\.(jpg|jpeg|gif|png)$/i,
+          loader: 'file-loader'
+        }]
     },
     postcss: [autoprefixer({
       browsers: ['last 2 versions']

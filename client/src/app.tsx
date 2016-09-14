@@ -1,5 +1,5 @@
 
-
+///<reference path="../../typings/index.d.ts"/>
 //   神兽护体
 //   ┏┓       ┏┓
 //  ┏┛┻━━━━━━━┛┻┓
@@ -18,20 +18,19 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-import React, { Component, PropTypes } from 'react';
+import { Component, PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { render } from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { createHistory } from 'history';
 import { syncHistoryWithStore } from 'react-router-redux';
-import Immutable from 'immutable';
-import installDevTools from 'immutable-devtools';
 import configureStore from './store/configureStore';
+import installDevTools = require('immutable-devtools');
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import configureRoutes from './routes/';
 import Root from './containers/Root';
-
+import Immutable = require('immutable');
 import '../styles/app.less';
 
 installDevTools(Immutable);
@@ -66,7 +65,7 @@ installDevTools(Immutable);
 // Chrome Developer tools.
 
 
-const initialState = window.__INITIAL_STATE__;
+const initialState = window.__INITIAL_STATE__ || {};
 
 const store = configureStore(initialState);
 
