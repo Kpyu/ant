@@ -27,17 +27,21 @@
   "homepage": "https://github.com/Alex1512/AntCMS#readme",
   "dependencies": {
     "antd": "^1.11.0",
+    "axios": "^0.14.0",
+    "immutable": "^3.8.1",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^2.2.0",
     "koa-favicon": "^2.0.0",
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
     "koa-views": "^5.1.2",
+    "mongoose": "^4.6.0",
     "react": "^15.3.1",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0"
   },
   "devDependencies": {
-    "ts-loader": "^0.8.2"
+    "ts-loader": "^0.8.2",
+    "webpack": "^1.13.2"
   }
 }
