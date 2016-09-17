@@ -16,26 +16,21 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
+///<reference path="../typings/index.d.ts" />
+///<reference path="../dts/index.d.ts" />
 
-import Koa from 'koa';
-import Path from 'path';
-import bunyanLogger from 'koa-bunyan';
-import bodyParser from 'koa-bodyparser';
-import convert from 'koa-convert';
-import serve from 'koa-static';
-import serveCache from 'koa-static-cache';
-import views from 'koa-views';
-import render from 'koa-ejs';
-import co from 'co';
-import Boom from 'boom';
-import favicon from 'koa-favicon';
-import mongoose from 'mongoose';
-import renderApp from './serverRender';
-import logger from './logger';
-import Config from '../config';
-import assetsPipeLine from './middleware/assetsPipeLine';
+import * as Koa from 'koa';
+import * as Path from 'path';
+import * as bodyParser from 'koa-bodyparser';
+import * as serve from 'koa-static';
+import * as views from 'koa-views';
+import * as co from 'co';
+import * as favicon from 'koa-favicon';
+import * as mongoose from 'mongoose';
+// import renderApp from './serverRender';
+import Config from './config';
 import router from './router';
-const app = new Koa();
+const app = new Koa();  
 const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // app.use(convert(bunyanLogger(logger, {
 //   level: 'info',
@@ -43,7 +38,7 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // })));
 mongoose.connect(mongoDB);
 
-app.use(favicon(Path.join(__dirname, '..', '/client/favicon.ico')));
+app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 
 // 添加webpack 中间件
 // if (Config.env ===  'development') {
@@ -51,8 +46,9 @@ app.use(favicon(Path.join(__dirname, '..', '/client/favicon.ico')));
 // }
 
 // 添加ejs视图解析器
-render(app, Config.view);
-app.context.render = co.wrap(app.context.render);
+app.use(views(Path.resolve(__dirname, '..','views'), {
+  map:'ejs'
+}))
 
 // 添加react渲染器
 // renderReact(app, Config.reactConfig);
@@ -73,7 +69,7 @@ app.use(serve(Config.static.directory));
 app.use(bodyParser());
 
 // 注册路由
-app.use(router);
+// app.use(router);
 // app.use(router.allowedMethods());
 app.listen(Config.port, function () {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);

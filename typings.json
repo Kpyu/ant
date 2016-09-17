@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "co": "registry:npm/co#4.6.0+20160905045231",
+    "koa": "registry:npm/koa#2.0.0+20160903085952",
+    "mongoose": "registry:npm/mongoose#4.3.5+20160628072220",
+    "react": "registry:npm/react#15.0.1+20160601175240",
+    "webpack": "registry:npm/webpack#1.12.9+20160418172948"
+  },
+  "globalDependencies": {
+    "koa-bodyparser": "registry:dt/koa-bodyparser#3.0.0+20160414124440",
+    "koa-router": "registry:dt/koa-router#7.0.0+20160907102352",
+    "koa-static": "registry:dt/koa-static#2.0.0+20160807195632"
+  }
+}

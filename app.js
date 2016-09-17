@@ -16,6 +16,4 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-require('babel-polyfill');
-require('babel-core/register');
-require('./server');
+require('./lib/server');

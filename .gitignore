@@ -41,3 +41,4 @@ test/
 typings
 jsconfig.json
 .vscode/*
+lib
