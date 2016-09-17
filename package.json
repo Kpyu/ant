@@ -24,7 +24,8 @@
   "homepage": "https://github.com/Alex1512/AntCMS#readme",
   "dependencies": {
     "antd": "^1.11.0",
-    "axios": "^0.11.0",
+
+    "axios": "^0.11.1",
     "babel-core": "^6.7.2",
     "babel-plugin-transform-class-properties": "^6.8.0",
     "babel-polyfill": "^6.7.2",
@@ -68,8 +69,8 @@
     "material-ui": "^0.15.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.12",
-    "react": "^15.1.0",
-    "react-dom": "^15.0.1",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.2.4",
     "react-router-redux": "^4.0.4",
@@ -90,8 +91,8 @@
     "wrench": "^1.5.8"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "babel-eslint": "^6.0.2",
+    "autoprefixer": "^6.4.0",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-check-es2015-constants": "^6.7.2",
