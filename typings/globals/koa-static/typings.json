@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d765fdbf2517c151c69b9cb5afd86eff149cbce6/koa-static/koa-static.d.ts",
+    "raw": "registry:dt/koa-static#2.0.0+20160807195632",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/d765fdbf2517c151c69b9cb5afd86eff149cbce6/koa-static/koa-static.d.ts"
+  }
+}
