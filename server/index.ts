@@ -28,6 +28,7 @@ import * as co from 'co';
 import * as favicon from 'koa-favicon';
 import mongoose = require('mongoose');
 import mongooseMiddleware from './middleware/koa-mongoose';
+import pipeLine from './middleware/assetsPipeLine';
 import config from './config';
 
 global['__DB__'] =  mongoose.connect(config.mongoUrl).connection;
@@ -48,6 +49,7 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 
 // mongoose.connect(mongoDB);
 app.use(mongooseMiddleware);
+// app.use(pipeLine());
 app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 
 // 添加webpack 中间件
@@ -56,8 +58,10 @@ app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 // }
 
 // 添加ejs视图解析器
-app.use(views(Path.resolve(__dirname, '..', 'views'), {
-  map: 'ejs'
+app.use(views(Path.resolve(__dirname, '../../', 'views'), {
+  map: {
+    html:'ejs'
+  },
 }))
 
 // 添加react渲染器
@@ -70,10 +74,10 @@ app.use(serve(Config.static.directory));
 
 
 // 添加assets管道
-// app.use(assetsPipeLine({
-//   manifest: Path.join(__dirname, '..', 'manifest.json'),
-//   prepend: ''
-// }));
+app.use(pipeLine({
+  manifest: Path.join(__dirname, '../../', 'manifest.json'),
+  prepend: ''
+}));
 
 // 添加各种中间件
 app.use(bodyParser());

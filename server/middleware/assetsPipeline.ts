@@ -29,7 +29,7 @@ export default function (opts) {
     throw new Error('`prepend` property defined, but it was not a string');
   }
   opts.prepend = opts.prepend || '';
-  return async (ctx, next) => {
+  return async (ctx:any, next:any) => {
     console.log('进入资源管道');
     const manifest = require(opts.manifest);
     ctx.state = ctx.state || {};

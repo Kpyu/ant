@@ -1,12 +1,11 @@
 import * as Koa from 'koa';
 import * as glob from 'glob';
 import * as fs from 'fs';
-var config = require('../config');
+var config = require('../config').default;
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 async function MongooseMiddleware(ctx: Koa.Context | any, next: any) {
     let files = glob.sync(config.mongooseConfig.schemas + '/**/*.js');
-    // let dbConnection = mongoose.connection;
     const schemas = config.mongooseConfig.schemas + ((config.mongooseConfig.schemas.lastIndexOf('/') === config.mongooseConfig.schemas.length - 1) ? '' : '/');
     ctx.models = {};
     files.map(file => {
@@ -20,7 +19,7 @@ async function MongooseMiddleware(ctx: Koa.Context | any, next: any) {
 
     ctx.model = modelName => {
         try {
-            let modelU = ctx.models[modelName]
+            let modelU = ctx.models[modelName];
             return modelU;
         } catch (err) {
             console.log(err)
