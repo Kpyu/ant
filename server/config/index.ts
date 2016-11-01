@@ -18,6 +18,7 @@
 //     ┗┻┛  ┗┻┛
 import * as Path from 'path';
 import * as webpack from 'webpack';
+import * as mongoose from 'mongoose';
 const port = process.env.PORT || 3000;
 const DEBUG = process.env.NODE_ENV === 'development';
 function configEnv(name) {
@@ -29,6 +30,17 @@ export default {
   mongoUrl: configEnv('env').mongoUrl,
   env: process.env.NODE_ENV || 'development',
   port: port, // 监听端口
+  mongooseConfig:{
+    schemas: Path.join(__dirname, '..', 'models'),
+  },
+  mongodb: {
+    username: '',
+    password: '',
+    host: '127.0.0.1',
+    port: 27107,
+    database: 'ant'
+  },
+
   session: { // session 配置
     cookie: {
       maxAge: 1000 * 60 * 60 * 24

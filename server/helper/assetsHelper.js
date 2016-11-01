@@ -21,8 +21,8 @@
  * @param {object} manifest 静态文件映射表
  * @return {string} 渲染之后的模板
  */
-import ejs from 'ejs';
-import fs from 'fs';
+import * as ejs from 'ejs';
+import * as fs from 'fs';
 export default function assetsHelper(path, opts) {
   // 读取模板文件
   let tpl = fs.readFileSync(path, 'utf8');

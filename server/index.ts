@@ -26,11 +26,16 @@ import * as serve from 'koa-static';
 import * as views from 'koa-views';
 import * as co from 'co';
 import * as favicon from 'koa-favicon';
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
+import mongooseMiddleware from './middleware/koa-mongoose';
+import config from './config';
+
+global['__DB__'] =  mongoose.connect(config.mongoUrl).connection;
+
 // import renderApp from './serverRender';
 import Config from './config';
 import router from './router';
-const app = new Koa();  
+const app = new Koa();
 const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 
 
@@ -41,8 +46,8 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 
 
 
-mongoose.connect(mongoDB);
-
+// mongoose.connect(mongoDB);
+app.use(mongooseMiddleware);
 app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 
 // 添加webpack 中间件
@@ -51,8 +56,8 @@ app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 // }
 
 // 添加ejs视图解析器
-app.use(views(Path.resolve(__dirname, '..','views'), {
-  map:'ejs'
+app.use(views(Path.resolve(__dirname, '..', 'views'), {
+  map: 'ejs'
 }))
 
 // 添加react渲染器

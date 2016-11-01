@@ -1,3 +1,3 @@
 export default {
-  mongoUrl: 'mongodb://localhost/ANTCMS'
+  mongoUrl: 'mongodb://localhost/ant'
 };

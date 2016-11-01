@@ -28,6 +28,8 @@
   "dependencies": {
     "antd": "^1.11.0",
     "axios": "^0.14.0",
+    "bluebird": "^3.4.6",
+    "glob": "^7.1.1",
     "immutable": "^3.8.1",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^2.2.0",
@@ -35,13 +37,32 @@
     "koa-router": "^7.0.1",
     "koa-static": "^2.0.0",
     "koa-views": "^5.1.2",
-    "mongoose": "^4.6.0",
-    "react": "^15.3.1",
-    "react-redux": "^4.4.5",
-    "redux": "^3.6.0"
+    "mongoose": "^4.6.5",
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/http": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
+    "@angular/router": "~3.1.0",
+    "@angular/upgrade": "~2.1.0",
+    "angular-in-memory-web-api": "~0.1.5",
+    "bootstrap": "^3.3.7",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "zone.js": "^0.6.25",
+    "util": "^0.10.3"
+    
   },
   "devDependencies": {
     "ts-loader": "^0.8.2",
-    "webpack": "^1.13.2"
+    "typescript": "^2.0.6",
+    "webpack": "^1.13.2",
+    "concurrently": "^3.0.0",
+    "lite-server": "^2.2.2",
+    "typings":"^1.4.0"
   }
 }

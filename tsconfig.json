@@ -1,10 +1,13 @@
 {
     "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "target": "es5",
-        "jsx": "react",
-        "sourceMap": true
+        "removeComments": false,
+        "noImplicitAny": false
     },
     "exclude": [
         "typings/main.d.ts",
