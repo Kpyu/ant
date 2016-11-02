@@ -5,6 +5,7 @@ const jscs = require('gulp-jscs');
 const clean = require('gulp-clean');
 const changed = require('gulp-changed');
 const gutil = require('gulp-util');
+const ts = require('gulp-typescript');
 // const webpack = require('webpack-stream');
 
 // Webpack
@@ -15,13 +16,13 @@ const WebpackDevServer = require('webpack-dev-server');
 
 gulp.task('default', function () {
   return gulp.src(['*.js',
-        'config/*.js', 'config/**/*.js',
-        'client/js/common/*.js',
-        'client/js/*.js',
-        'libs/*.js'
-    ])
-        .pipe(jscs())
-        .pipe(jscs.reporter());
+    'config/*.js', 'config/**/*.js',
+    'client/js/common/*.js',
+    'client/js/*.js',
+    'libs/*.js'
+  ])
+    .pipe(jscs())
+    .pipe(jscs.reporter());
 });
 
 
@@ -51,15 +52,15 @@ gulp.task('static', function (done) {
   compiler = webpack(config);
 
 
-//   compiler.run(function(err, stats) {
-//     if (err) {
-//       throw new gutil.PluginError('webpack:build-dev', err);
-//     }
-//     gutil.log('[webpack:build-dev]', stats.toString({
-//       colors: true
-//     }));
-//     done();
-//   });
+  //   compiler.run(function(err, stats) {
+  //     if (err) {
+  //       throw new gutil.PluginError('webpack:build-dev', err);
+  //     }
+  //     gutil.log('[webpack:build-dev]', stats.toString({
+  //       colors: true
+  //     }));
+  //     done();
+  //   });
   new WebpackDevServer(compiler, {
     stats: {
       colors: true
@@ -85,10 +86,18 @@ gulp.task('sprites', function () {
     cssPath: '../../less/',
     margin: 0,
 
-        // ... other optional options
-        // for example if you want to generate scss instead of css
-        // make sure you have installed sprity-sass
+    // ... other optional options
+    // for example if you want to generate scss instead of css
+    // make sure you have installed sprity-sass
     processor: 'css'
   })
- .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
+    .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
+});
+
+
+gulp.task('compile', (done) => {
+  return gulp.src([
+    'server/**/*.ts'
+  ])
+  .pipe(ts());
 });

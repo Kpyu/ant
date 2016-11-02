@@ -39,7 +39,7 @@ router.get('/resgistry', async (ctx: any, next: any) => {
             password: 'admin1234'
         });
         console.log('schema-----', userObj);
-        let result = await userObj.save((err) => {
+        let result = await userObj.save((err:any) => {
             console.log(err);
         });
         console.log(result);

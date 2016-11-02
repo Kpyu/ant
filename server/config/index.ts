@@ -21,7 +21,7 @@ import * as webpack from 'webpack';
 import * as mongoose from 'mongoose';
 const port = process.env.PORT || 3000;
 const DEBUG = process.env.NODE_ENV === 'development';
-function configEnv(name) {
+function configEnv(name:any) {
   return require('./' + (process.env.NODE_ENV || 'development') + '/' + name).default;
 }
 export default {
@@ -60,7 +60,7 @@ export default {
   static: { // 静态资源目录配置
     directory: Path.resolve(__dirname, '..', 'dist')
   },
-  envConfig: function (name) {
+  envConfig: function (name:any) {
     return require('./' + (process.env.NODE_ENV || 'development') + '/' + name);
   },
   /**

@@ -11,11 +11,13 @@
     "webpack": "registry:npm/webpack#1.12.9+20160418172948"
   },
   "globalDependencies": {
+    "cookies": "registry:dt/cookies#0.5.1+20160316171810",
+    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
+    "koa": "registry:dt/koa#2.0.0+20160724024233",
     "koa-bodyparser": "registry:dt/koa-bodyparser#3.0.0+20160414124440",
     "koa-router": "registry:dt/koa-router#7.0.0+20160907102352",
     "koa-static": "registry:dt/koa-static#2.0.0+20160807195632",
-    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160909174046"
+    "node": "registry:dt/node#6.0.0+20161019125345"
   }
 }

@@ -17,7 +17,7 @@ async function MongooseMiddleware(ctx: Koa.Context | any, next: any) {
         ctx.models[modelName] = require(file).default;
     });
 
-    ctx.model = modelName => {
+    ctx.model = (modelName:string) => {
         try {
             let modelU = ctx.models[modelName];
             return modelU;

@@ -2,13 +2,19 @@
     "compilerOptions": {
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "suppressImplicitAnyIndexErrors": true,
+        "removeComments": false,
         "module": "commonjs",
+        "noImplicitAny": true,
         "declaration": true,
         "target": "es6",
         "sourceMap": true,
+        "types" : [],
+        "typeRoots" : ["../typings"],
         "outDir": "../lib/"
     },
     "exclude": [
-        "node_modules"
+        "../node_modules"
     ]
 }
