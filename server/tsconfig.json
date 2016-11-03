@@ -10,11 +10,14 @@
         "declaration": true,
         "target": "es6",
         "sourceMap": true,
-        "types" : [],
-        "typeRoots" : ["../typings"],
+        "types": [],
         "outDir": "../lib/"
     },
+    "include": [
+     "./**/*.ts"
+    ],
     "exclude": [
-        "../node_modules"
+        "../node_modules",
+        "../typings/globals/core-js"
     ]
 }

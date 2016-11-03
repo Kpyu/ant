@@ -9,12 +9,13 @@
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "types": []
+    "types": [],
+    "outDir": "aot/release"
   },
 
   "files": [
-    "client/ngApp/app.module.ts",
-    "client/ngApp/main.ts",
+    "app/app.module.ts",
+    "app/main.ts",
     "./typings/index.d.ts"
   ],
 

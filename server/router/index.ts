@@ -19,10 +19,14 @@
 
 import * as Router from 'koa-router';
 const router = new Router();
-
+const DEBUG:boolean = process.env.NODE_ENV === 'development';
 router.get('/', async (ctx:any, next:any) => {
     // ctx.body = 'test!';
-    await ctx.render('index');
+    if(DEBUG){
+        await ctx.render('index');
+    }else{
+        await ctx.render('index-aot');
+    }
 })
 router.get('/resgistry', async (ctx: any, next: any) => {
     let User = ctx.model('user');

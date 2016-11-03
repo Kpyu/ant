@@ -10,7 +10,8 @@ export var AppComponent = (function () {
     AppComponent.decorators = [
         { type: Component, args: [{
                     selector: 'my-app',
-                    templateUrl: 'app.component.html'
+                    templateUrl: 'app.component.html',
+                    styleUrls: ['app.component.css']
                 },] },
     ];
     /** @nocollapse */

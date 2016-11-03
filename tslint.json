@@ -2,7 +2,7 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
-  // "extends": "tslint:latest",
+  "extends": "tslint:latest",
   "rules": {
     "class-name": true,
     "comment-format": [

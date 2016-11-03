@@ -28,7 +28,7 @@ gulp.task('default', function () {
 
 // clears dist directory
 gulp.task('clean', function () {
-  return gulp.src(['dist'], {
+  return gulp.src(['dist', 'lib'], {
     read: true
   }).pipe(clean());
 });
@@ -95,9 +95,15 @@ gulp.task('sprites', function () {
 });
 
 
-gulp.task('compile', (done) => {
-  return gulp.src([
+gulp.task('compile', ['clean'], (done) => {
+  var tsProject = ts.createProject('./server/tsconfig.json');
+  var tsResult = tsProject.src([
     'server/**/*.ts'
   ])
-  .pipe(ts());
+    .pipe(tsProject());
+  tsResult.js.pipe(gulp.dest('./lib'));
+});
+
+gulp.task('watch', (done) => {
+  gulp.watch('server/**/*.ts', ['compile']);
 });

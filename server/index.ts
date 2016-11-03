@@ -16,9 +16,7 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-///<reference path="../typings/index.d.ts" />
 ///<reference path="../dts/index.d.ts" />
-
 import * as Koa from 'koa';
 import * as Path from 'path';
 import * as bodyParser from 'koa-bodyparser';
@@ -58,7 +56,7 @@ app.use(favicon(Path.join(__dirname, '..', '..', '/client/favicon.ico')));
 // }
 
 // 添加ejs视图解析器
-app.use(views(Path.resolve(__dirname, '../../', 'views'), {
+app.use(views(Path.resolve(__dirname, '../', 'views'), {
   map: {
     html:'ejs'
   },
@@ -75,7 +73,7 @@ app.use(serve(Config.static.directory));
 
 // 添加assets管道
 app.use(pipeLine({
-  manifest: Path.join(__dirname, '../../', 'manifest.json'),
+  manifest: Path.join(__dirname, '../', 'manifest.json'),
   prepend: ''
 }));
 
