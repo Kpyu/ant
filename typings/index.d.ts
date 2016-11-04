@@ -1,5 +1,4 @@
 /// <reference path="globals/cookies/index.d.ts" />
-/// <reference path="globals/core-js/index.d.ts" />
 /// <reference path="globals/jasmine/index.d.ts" />
 /// <reference path="globals/koa-bodyparser/index.d.ts" />
 /// <reference path="globals/koa-router/index.d.ts" />

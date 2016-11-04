@@ -12,7 +12,7 @@
   },
   "globalDependencies": {
     "cookies": "registry:dt/cookies#0.5.1+20160316171810",
-    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
+    // "core-js": "registry:dt/core-js#0.0.0+20160725163759",
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
     "koa": "registry:dt/koa#2.0.0+20160724024233",
     "koa-bodyparser": "registry:dt/koa-bodyparser#3.0.0+20160414124440",

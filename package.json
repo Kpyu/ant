@@ -11,7 +11,9 @@
     "ngc": "ngc -p tsconfig-aot.json",
     "rollup": "rollup -c rollup-config.js && cp node_modules/core-js/client/shim.min.js aot/node_modules/ && cp node_modules/zone.js/dist/zone.js aot/node_modules",
     "map": "source-map-explorer aot/dist/build.js",
-    "dev": "gulp static"
+    "dev": "gulp static",
+    "webpack":"NODE_ENV=development webpack --progress -p",
+    "devs":"NODE_ENV=development webpack-dev-server -d --colors --hot --inline --port 4000"
   },
   "repository": {
     "type": "git",
@@ -64,17 +66,25 @@
   },
   "devDependencies": {
     "@types/core-js": "^0.9.34",
+    "angular2-template-loader": "^0.6.0",
+    "awesome-typescript-loader": "^2.2.4",
+    "codelyzer": "^1.0.0-beta.3",
     "concurrently": "^3.0.0",
     "gulp-typescript": "^3.1.2",
+    "html-loader": "^0.4.4",
+    "html-webpack-plugin": "^2.24.1",
     "lite-server": "^2.2.2",
+    "raw-loader": "^0.5.1",
     "rollup": "^0.36.3",
     "rollup-plugin-commonjs": "^5.0.5",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1",
     "source-map-explorer": "^1.3.3",
     "ts-loader": "^0.8.2",
+    "tslint": "^3.15.1",
     "typescript": "^2.0.6",
     "typings": "^1.4.0",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-merge": "^0.15.0"
   }
 }
