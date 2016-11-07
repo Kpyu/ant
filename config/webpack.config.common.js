@@ -1,8 +1,15 @@
+const fs = require('fs');
+const path = require('path');
 const webpack = require('webpack');
 const helpers = require('./helper');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+// let extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+const nodeModulesDir = path.join(__dirname, '../', 'node_modules');
+const publicPathConfig = {
+  production: 'url', // 这里配置cdn 地址
+  development: 'http://127.0.0.1:4000/dist'
+};
 const webpackConfig = {
   entry: {
     polyfills: ['./app/polyfills.ts'],
@@ -10,7 +17,10 @@ const webpackConfig = {
     app: ['./app/main.ts']
   },
   resolve: {
-    extensions: ['', '.ts', '.js']
+    extensions: ['', '.ts', '.js'],
+    alias: {
+      bootstrap: path.resolve(nodeModulesDir, 'bootstrap')
+    }
   },
   module: {
     loaders: [
@@ -35,7 +45,16 @@ const webpackConfig = {
         test: /\.css$/,
         include: helpers.root('app', 'app'),
         loader: 'raw'
+      },
+      {
+        test: /\.less$/,
+        include: helpers.root('app', 'app'),
+        loader: ExtractTextPlugin.extract('style', 'css!less')
       }
+      // { test: /\.woff$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+      // { test: /\.ttf$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+      // { test: /\.eot$/, loader: 'file' },
+      // { test: /\.svg$/, loader: 'url?limit=10000&mimetype=image/svg+xml' }
     ]
   },
   plugins: [
@@ -44,9 +63,38 @@ const webpackConfig = {
     }),
     new HtmlWebpackPlugin({
       template: 'app/index.html'
-    })
+    }),
+    new ExtractTextPlugin(('[name].css'))
   ]
 };
-
+webpackConfig.plugins.push(function () {
+  this.plugin('done', function (stats) {
+    var assets = stats.toJson().assetsByChunkName;
+    var assetName;
+    var vendors;
+    var i;
+    for (i in assets) {
+      if (assets.hasOwnProperty(i)) {
+        assetName = i;
+        vendors = assets[i];
+        console.log('资源', assets[i]);
+        if (typeof assets[i] === 'object' ||
+          Object.prototype.toString.call(assets[i]) === '[object Array]') {
+          console.log(assets[i]);
+          vendors.forEach(function (src, index) {
+            vendors[index] = [publicPathConfig[process.env.NODE_ENV], '/', src].join('');
+            console.log(src);
+          });
+        } else {
+          assets[i] = [publicPathConfig[process.env.NODE_ENV], '/', assets[i]].join('');
+        }
+      }
+    }
+    fs.writeFileSync(
+      path.join(__dirname, '../', 'manifest.json'),
+      JSON.stringify(assets)
+    );
+  });
+});
 module.exports = webpackConfig;
 

@@ -12,8 +12,8 @@
     "rollup": "rollup -c rollup-config.js && cp node_modules/core-js/client/shim.min.js aot/node_modules/ && cp node_modules/zone.js/dist/zone.js aot/node_modules",
     "map": "source-map-explorer aot/dist/build.js",
     "dev": "gulp static",
-    "webpack":"NODE_ENV=development webpack --progress -p",
-    "devs":"NODE_ENV=development webpack-dev-server -d --colors --hot --inline --port 4000"
+    "webpack": "NODE_ENV=development webpack --progress -p",
+    "devs": "NODE_ENV=development webpack-dev-server -d --colors --hot --inline --port 4000"
   },
   "repository": {
     "type": "git",
@@ -73,6 +73,7 @@
     "gulp-typescript": "^3.1.2",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.24.1",
+    "less-loader": "^2.2.3",
     "lite-server": "^2.2.2",
     "raw-loader": "^0.5.1",
     "rollup": "^0.36.3",

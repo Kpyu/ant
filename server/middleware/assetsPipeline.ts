@@ -30,7 +30,6 @@ export default function (opts:any) {
   }
   opts.prepend = opts.prepend || '';
   return async (ctx:any, next:any) => {
-    console.log('进入资源管道');
     const manifest = require(opts.manifest);
     ctx.state = ctx.state || {};
     ctx.state.assets = (fileName:string) => {
@@ -41,33 +40,34 @@ export default function (opts:any) {
     };
     ctx.state.css = (fileName:string) => {
       let outputUrl = opts.prepend + (manifest[fileName] || fileName);
-      return `<link ref="stylesheet" type="text/css" url="${outputUrl}"></link>`;
+      return `<link rel="stylesheet" href="${outputUrl}"></link>`;
     };
     ctx.state.script = (fileName:string) => {
       let scriptUrl = opts.prepend + (manifest[fileName] || fileName);
-      return `<script typeof="text/javascript" src="${scriptUrl}"></script>`;
+      return `<script type="text/javascript" src="${scriptUrl}"></script>`;
     };
     ctx.state.vender = (venderName:string) => {
       var tmps:any = [];
       var files = manifest[venderName];
+      console.log('进入资源管道', files);
       if (typeof files === 'object' ||
         Object.prototype.toString.call(files) === '[object Array]') {
         files.forEach(function (value:string, key:string) {
           if (/(.css)$/.test(value)) {
-            tmps.push(`<link ref="stylesheet" type="text/css" url="${value}"></link>`);
+            tmps.push(`<link rel="stylesheet" href="${value}"></link>`);
             return;
           }
           if (/(.js)$/.test(value)) {
-            tmps.push(`<script typeof="text/javascript" src="${value}"></script>`);
+            tmps.push(`<script type="text/javascript" src="${value}"></script>`);
             return;
           }
         });
       } else {
         if (/(.css)$/.test(files)) {
-          tmps.push(`<link ref="stylesheet" type="text/css" url="${files}"></link>`);
+          tmps.push(`<link rel="stylesheet"  href="${files}"></link>`);
         }
         if (/(.js)$/.test(files)) {
-          tmps.push(`<script typeof="text/javascript" src="${files}"></script>`);
+          tmps.push(`<script type="text/javascript" src="${files}"></script>`);
         }
       }
       return tmps.join('');

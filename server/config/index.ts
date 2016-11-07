@@ -20,6 +20,7 @@ import * as Path from 'path';
 import * as webpack from 'webpack';
 import * as mongoose from 'mongoose';
 const port = process.env.PORT || 3000;
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const DEBUG = process.env.NODE_ENV === 'development';
 function configEnv(name:any) {
   return require('./' + (process.env.NODE_ENV || 'development') + '/' + name).default;

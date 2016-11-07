@@ -23,7 +23,7 @@ const DEBUG:boolean = process.env.NODE_ENV === 'development';
 router.get('/', async (ctx:any, next:any) => {
     // ctx.body = 'test!';
     if(DEBUG){
-        await ctx.render('index');
+        await ctx.render('index-w');
     }else{
         await ctx.render('index-aot');
     }
