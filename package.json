@@ -42,6 +42,7 @@
     "@angular/platform-server": "^2.1.2",
     "@angular/router": "~3.1.0",
     "@angular/upgrade": "~2.1.0",
+    "admin-lte": "^2.3.8",
     "angular-in-memory-web-api": "~0.1.5",
     "antd": "^1.11.0",
     "axios": "^0.14.0",

@@ -20,7 +20,7 @@
 import * as Router from 'koa-router';
 const router = new Router();
 const DEBUG:boolean = process.env.NODE_ENV === 'development';
-router.get('/', async (ctx:any, next:any) => {
+router.get('/admin', async (ctx:any, next:any) => {
     // ctx.body = 'test!';
     if(DEBUG){
         await ctx.render('index-w');

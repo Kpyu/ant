@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-
 @Component({
   // moduleId: module.id,
-  selector: 'my-app',
-  // templateUrl: 'app.component.html',
-  template:'<hero-form></hero-form>',
+  selector: 'cms-app',
+  templateUrl: 'app.component.html',
+  // template:'<hero-form></hero-form>',
   styleUrls: ['app.component.css']
 })
 export class AppComponent {

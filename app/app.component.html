@@ -1,5 +1,34 @@
-<button (click)="toggleHeading()" class="button">Toggle Heading</button>
-<h1 *ngIf="showHeading">My First Angular App</h1>
+  <app-header></app-header>
+  <sider-bar></sider-bar>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="min-height: 802px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
 
-<h3>List of Heroes</h3>
-<div *ngFor="let hero of heroes">{{hero}}</div>
+    <!-- Main content -->
+    <section class="content">
+        <router-outlet></router-outlet>
+      <!-- Your Page Content Here -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+  </footer>
