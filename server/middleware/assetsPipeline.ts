@@ -16,7 +16,7 @@
 //    ┗┓┓┏━━┳┓┏━━┛
 //     ┃┫┫  ┃┫┫
 //     ┗┻┛  ┗┻┛
-export default function (opts:any) {
+export default function (opts: any) {
   if (typeof opts !== 'object') {
     throw new Error('`options` argument required');
   }
@@ -29,30 +29,43 @@ export default function (opts:any) {
     throw new Error('`prepend` property defined, but it was not a string');
   }
   opts.prepend = opts.prepend || '';
-  return async (ctx:any, next:any) => {
+  return async (ctx: any, next: any) => {
     const manifest = require(opts.manifest);
     ctx.state = ctx.state || {};
-    ctx.state.assets = (fileName:string) => {
+    ctx.state.assets = (fileName: string) => {
       let output = opts.prepend + fileName;
       output = opts.prepend + (manifest[fileName] || fileName);
       console.log('静态链接：', output);
       return output;
     };
-    ctx.state.css = (fileName:string) => {
-      let outputUrl = opts.prepend + (manifest[fileName] || fileName);
-      return `<link rel="stylesheet" href="${outputUrl}"></link>`;
+    ctx.state.css = (fileName: string) => {
+      let files = manifest[fileName];
+      let tmps: any = [];
+      if (typeof files === 'object' ||
+        Object.prototype.toString.call(files) === '[object Array]') {
+        files.forEach((value: string, key: string) => {
+          if (/(.css)$/.test(value)) {
+            tmps.push(`<link rel="stylesheet" href="${value}"></link>`);
+            return;
+          }
+        });
+      } else {
+        if (/(.css)$/.test(files)) {
+          tmps.push(`<link rel="stylesheet"  href="${files}"></link>`);
+        }
+      }
+      return tmps.join('\n');
     };
-    ctx.state.script = (fileName:string) => {
+    ctx.state.script = (fileName: string) => {
       let scriptUrl = opts.prepend + (manifest[fileName] || fileName);
       return `<script type="text/javascript" src="${scriptUrl}"></script>`;
     };
-    ctx.state.vender = (venderName:string) => {
-      var tmps:any = [];
-      var files = manifest[venderName];
-      console.log('进入资源管道', files);
+    ctx.state.vender = (venderName: string) => {
+      let tmps: any = [];
+      let files = manifest[venderName];
       if (typeof files === 'object' ||
         Object.prototype.toString.call(files) === '[object Array]') {
-        files.forEach(function (value:string, key:string) {
+        files.forEach((value: string, key: string) => {
           if (/(.css)$/.test(value)) {
             tmps.push(`<link rel="stylesheet" href="${value}"></link>`);
             return;
@@ -70,7 +83,7 @@ export default function (opts:any) {
           tmps.push(`<script type="text/javascript" src="${files}"></script>`);
         }
       }
-      return tmps.join('');
+      return tmps.join('\n');
     };
     await next();
   };

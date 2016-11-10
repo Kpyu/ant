@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   // moduleId: 'user-list',
   selector: 'app-user-list',
-  templateUrl: 'user-list.component.html'
+  templateUrl: 'user-list.component.html',
   // styleUrls: ['view-list.component.css'],
 })
 export class UserListComponent implements OnInit {
   ngOnInit() {
-    
+
   }
 }

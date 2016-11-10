@@ -3,7 +3,7 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 
 
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
   doCollapse() {
     console.log(document.body.className);
-    var classNames = document.body.className.split(' ');
+    let classNames = document.body.className.split(' ');
     if (classNames.indexOf('sidebar-collapse') >= 0) {
       remove('sidebar-collapse', classNames);
       this.onCollpase.emit(true);

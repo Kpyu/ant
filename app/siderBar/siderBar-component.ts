@@ -7,7 +7,7 @@ import {
   transition,
   animate,
   Input,
-  Output
+  Output,
 } from '@angular/core';
 @Component({
   moduleId: 'sider-bar',
@@ -18,16 +18,16 @@ import {
       [
         state('inactive',
           style({
-            width: '0'
+            width: '0',
           })
         ),
         state('active', style({
-          width: '230px'
+          width: '230px',
         })),
         transition('inactive=>active', animate('100ms ease-in')),
         transition('active=>inactive', animate('100ms ease-out')),
-      ])
-  ]
+      ]),
+  ],
 })
 export class SiderBarComponent implements OnInit {
 
