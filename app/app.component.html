@@ -1,5 +1,5 @@
-  <app-header></app-header>
-  <sider-bar></sider-bar>
+  <app-header [(collapse)] = "collapse" (onCollpase) = "onCollpase($event)"></app-header>
+  <sider-bar [(state)] = "state"></sider-bar>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" style="min-height: 802px;">
     <!-- Content Header (Page header) -->

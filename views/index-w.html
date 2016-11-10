@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <title>NodeCMS</title>
   <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- Font Awesome -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -17,7 +17,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <%- vender('polyfills')%>
-  <%- vender('vendor')%>
+    <%- vender('vendor')%>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -39,10 +39,51 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
+
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <cms-app style="min-height:100%"></cms-app>
   </div>
 </body>
-  <%- vender('app')%>
+<%- vender('app')%>
+<script type="text/javascript">
+    function fixLayout() {
+      var elem = document.querySelector('.main-header');
+      var neg = document.querySelector('.main-header').clientHeight + document.querySelector('.main-footer').clientHeight;
+      var windowHeight = window.innerHeight;
+      var sideBarHeight = document.querySelector('.sidebar').clientHeight;
+      var contentElem = document.querySelector('.content-wrapper'); 
+      var footElem = document.querySelector('.main-footer'); 
+      if (document.body.className.indexOf('fixed') >= 0) {
+        contentElem.style.minHeight = windowHeight - footElem.clientHeight + 'px';
+      }else{
+        var postSetwidth;
+        if(windowHeight >= sideBarHeight){
+          contentElem.style.minHeight = windowHeight-neg + 'px';
+          postSetwidth = windowHeight-neg;
+        }else{
+          contentElem.style.minHeight = windowHeight-neg + 'px';
+          postSetwidth = windowHeight-neg;            
+        }
+      }
+  }
+  function fixSidebar(){
+    var sidebarElem = document.querySelector('.sidebar');
+    var windowHeight = window.innerHeight;
+    var headElem = document.querySelector('.main-header');
+    if (document.body.className.indexOf('fixed') >= 0) {
+      sidebarElem.style.height = 'auto';
+    }
+    sidebarElem.style.height = windowHeight - headElem.clientHeight + 'px';     
+  }
+  window.onload = function(){
+    fixLayout();
+    fixSidebar();
+  }
+  window.onresize = function(){
+    fixLayout();
+    fixSidebar();
+  }
+</script>
+
 </html>
