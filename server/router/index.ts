@@ -18,11 +18,16 @@
 //     ┗┻┛  ┗┻┛
 
 import * as Router from 'koa-router';
+import { IRouterContext } from 'koa-router';
 const router = new Router();
 const DEBUG: boolean = process.env.NODE_ENV === 'development';
 
-// 跳转管理页首页
-router.get('/admin', async (ctx: any, next: any) => {
+export interface IContext extends IRouterContext {
+    render(view: string): void;
+    model(modelName: string): any;
+}
+
+router.get('/admin', async (ctx: IContext, next: Router.IMiddleware) => {
     // ctx.body = 'test!';
     if (DEBUG) {
         await ctx.render('index-w');
@@ -33,24 +38,24 @@ router.get('/admin', async (ctx: any, next: any) => {
 
 
 // 跳转登录页面
-router.get('/login', async (ctx: any, next: any) => {
+router.get('/login', async (ctx: IContext, next: Router.IMiddleware) => {
     await ctx.render('login');
 });
 
 
 // 执行登录
-router.post('/login', async (ctx: any, next: any) => {
+router.post('/login', async (ctx: IContext, next: Router.IMiddleware) => {
     await ctx.render('login');
 });
 
 // 跳转注册页面
-router.get('/resgistry', async (ctx: any, next: any) => {
+router.get('/resgistry', async (ctx: IContext, next: Router.IMiddleware) => {
     await ctx.render('login');
 });
 
 
 // 执行注册
-router.post('/resgistry', async (ctx: any, next: any) => {
+router.post('/resgistry', async (ctx: IContext, next: Router.IMiddleware) => {
     let User = ctx.model('user');
     let user = await User.findOne({
         username: 'admin',

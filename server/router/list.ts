@@ -18,7 +18,11 @@
 //     ┗┻┛  ┗┻┛
 
 import * as Router from 'koa-router';
+
+import { IContext } from './index';
+
 const router = new Router();
-router.get('/list', (ctx, next)=>{
-  ctx.body = 'list';
-})
+
+router.get('/list', async (ctx: IContext, next: Router.IMiddleware) => {
+  await ctx.body('list');
+});

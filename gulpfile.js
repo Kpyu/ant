@@ -1,9 +1,8 @@
 const gulp = require('gulp');
-const gulpif = require('gulp-if');
-const sprity = require('sprity');
-const jscs = require('gulp-jscs');
+// const gulpif = require('gulp-if');
+// const sprity = require('sprity');
 const clean = require('gulp-clean');
-const changed = require('gulp-changed');
+// const changed = require('gulp-changed');
 const gutil = require('gulp-util');
 const ts = require('gulp-typescript');
 // const webpack = require('webpack-stream');
@@ -14,16 +13,16 @@ const webpackConf = require('./webpack.config');
 const WebpackDevServer = require('webpack-dev-server');
 
 
-gulp.task('default', function () {
-  return gulp.src(['*.js',
-    'config/*.js', 'config/**/*.js',
-    'client/js/common/*.js',
-    'client/js/*.js',
-    'libs/*.js'
-  ])
-    .pipe(jscs())
-    .pipe(jscs.reporter());
-});
+// gulp.task('default', function () {
+//   return gulp.src(['*.js',
+//     'config/*.js', 'config/**/*.js',
+//     'client/js/common/*.js',
+//     'client/js/*.js',
+//     'libs/*.js'
+//   ])
+//     .pipe(jscs())
+//     .pipe(jscs.reporter());
+// });
 
 
 // clears dist directory
@@ -79,20 +78,20 @@ gulp.task('static', function (done) {
 
 
 // generate sprite.png and _sprite.scss
-gulp.task('sprites', function () {
-  return sprity.src({
-    src: './client/img/icon/*.{png,jpg}',
-    style: './sprite.css',
-    cssPath: '../../less/',
-    margin: 0,
+// gulp.task('sprites', function () {
+//   return sprity.src({
+//     src: './client/img/icon/*.{png,jpg}',
+//     style: './sprite.css',
+//     cssPath: '../../less/',
+//     margin: 0,
 
-    // ... other optional options
-    // for example if you want to generate scss instead of css
-    // make sure you have installed sprity-sass
-    processor: 'css'
-  })
-    .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
-});
+//     // ... other optional options
+//     // for example if you want to generate scss instead of css
+//     // make sure you have installed sprity-sass
+//     processor: 'css'
+//   })
+//     .pipe(gulpif('*.png', gulp.dest('./client/img/'), gulp.dest('./client/less/')));
+// });
 
 
 gulp.task('compile', ['clean'], (done) => {
