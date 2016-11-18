@@ -1,1 +1,8 @@
-<div>user-list</div>
+<div>
+  user-list
+  <div class="search-result" >
+      {{users|async|json}}
+      {{usersCopy|json}}
+    </div>
+  <button (click)="doSearch($event)">search</button>
+</div>

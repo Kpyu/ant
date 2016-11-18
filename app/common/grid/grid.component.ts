@@ -1,11 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-grid',
-  templateUrl: 'grid.component',
+    selector: 'app-grid',
+    templateUrl: 'grid.component',
+    styles: ['grid.component.css'],
 })
 export class GridComponent implements OnInit {
-  ngOnInit() {
+    
+    loadColumn() {
+        
+    }
+    
+    loadGridData() {
+        
+    }
 
-  }
+    ngOnInit() {
+
+    }
 }

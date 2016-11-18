@@ -1,35 +1,31 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { FormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { SiderBarComponent } from './siderBar/siderBar-component';
-
 import { AppRoutingModule } from './app-routing.module';
-
+import { AppComponent } from './app.component';
+import { CommonModule } from './common';
+import { HeaderComponent } from './header/header.component';
 import { HeroFormComponent } from './hero/hero-form.component';
-import 'bootstrap/dist/css/bootstrap.css';
-
-import 'admin-lte/dist/css/AdminLTE.css';
-
-import 'admin-lte/dist/css/skins/skin-blue.css';
+import { SiderBarComponent } from './siderBar/siderBar-component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
+    CommonModule,
     AppRoutingModule,
   ],
-  // providers:    [ Logger ],
+  providers: [],
   declarations: [
     AppComponent,
     HeroFormComponent,
     HeaderComponent,
     SiderBarComponent,
   ],
-  exports:      [ AppComponent ],
-  bootstrap:    [ AppComponent ],
+  exports: [AppComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

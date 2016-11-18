@@ -19,7 +19,9 @@ const webpackConfig = {
   resolve: {
     extensions: ['', '.ts', '.js'],
     alias: {
-      bootstrap: path.resolve(nodeModulesDir, 'bootstrap')
+      bootstrap: path.resolve(nodeModulesDir, 'bootstrap'),
+      ionicons: path.resolve(nodeModulesDir, 'ionicons/dist/css/ionicons.min.css'),
+      'font-awesome': path.resolve(nodeModulesDir, 'font-awesome/css/font-awesome.min.css')
     }
   },
   module: {
@@ -33,7 +35,7 @@ const webpackConfig = {
         loader: 'html'
       },
       {
-        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        test: /\.(png|jpe?g|gif)$/,
         loader: 'file?name=assets/[name].[hash].[ext]'
       },
       {
@@ -50,11 +52,23 @@ const webpackConfig = {
         test: /\.less$/,
         include: helpers.root('app', 'app'),
         loader: ExtractTextPlugin.extract('style', 'css!less')
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?\S*$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff'
+      },
+      {
+        test: /\.ttf(\?v=[0-9]\.[0-9]\.[0-9])?\S*$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream'
+      },
+      {
+        test: /\.eot(\?v=[0-9]\.[0-9]\.[0-9])?\S*$/,
+        loader: 'file'
+      },
+      {
+        test: /\.svg(\?v=[0-9]\.[0-9]\.[0-9])?\S*$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml'
       }
-      // { test: /\.woff$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      // { test: /\.ttf$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      // { test: /\.eot$/, loader: 'file' },
-      // { test: /\.svg$/, loader: 'url?limit=10000&mimetype=image/svg+xml' }
     ]
   },
   plugins: [

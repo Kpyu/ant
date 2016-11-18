@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import {
-  Routes,
-  RouterModule,
-} from '@angular/router';
-import { UserListComponent } from './users';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
+import { CommonModule } from './common';
+import { UserListComponent } from './users';
 const appRoutes: Routes = [
   {
     path: '',
@@ -18,7 +19,14 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [
+    FormsModule,
+    HttpModule,
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
+    CommonModule,
+  ],
+  providers: [],
   declarations: [
     UserListComponent,
   ],
