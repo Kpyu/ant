@@ -17,4 +17,4 @@ pipesArr.forEach((val, index) => {
     ],
     exports: [],
 })
-export class CommonModule { };
+export class SelfCommonModule { };

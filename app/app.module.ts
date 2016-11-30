@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CommonModule } from './common';
 import { HeaderComponent } from './header/header.component';
 import { HeroFormComponent } from './hero/hero-form.component';
 import { SiderBarComponent } from './siderBar/siderBar-component';
@@ -15,7 +14,6 @@ import { SiderBarComponent } from './siderBar/siderBar-component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    CommonModule,
     AppRoutingModule,
   ],
   providers: [],
@@ -25,7 +23,7 @@ import { SiderBarComponent } from './siderBar/siderBar-component';
     HeaderComponent,
     SiderBarComponent,
   ],
-  exports: [AppComponent],
+  // exports: [AppComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

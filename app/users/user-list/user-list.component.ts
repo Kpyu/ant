@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
     ngOnInit(): void {
         this.users = this.searchTerms
             .debounceTime(300)        // wait for 300ms pause in events
-            // .distinctUntilChanged()   // ignore if next search term is same as previous
+            .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap((term) => {
                 console.log(term);
                 if (term) {

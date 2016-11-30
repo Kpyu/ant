@@ -1,11 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
-import { CommonModule } from './common';
-import { UserListComponent } from './users';
 const appRoutes: Routes = [
   {
     path: '',
@@ -14,22 +8,12 @@ const appRoutes: Routes = [
   },
   {
     path: 'admin',
-    component: UserListComponent,
+    loadChildren: './users/user.module#UserModule',
   },
 ];
 
 @NgModule({
-  imports: [
-    FormsModule,
-    HttpModule,
-    BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    CommonModule,
-  ],
-  providers: [],
-  declarations: [
-    UserListComponent,
-  ],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
