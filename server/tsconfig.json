@@ -16,8 +16,5 @@
     "include": [
      "./**/*.ts"
     ],
-    "exclude": [
-        "../node_modules",
-        "../typings/globals/core-js"
-    ]
+    "exclude": [   ]
 }

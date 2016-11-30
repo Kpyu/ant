@@ -10,7 +10,6 @@
     app.use(favicon(__dirname + '/public/favicon.ico'));
  =============================================== */
 
-/// <reference path="../typings/globals/koa/index.d.ts"/>
 declare module "koa-favicon" {
 
     import * as Koa from "koa";
