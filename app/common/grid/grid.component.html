@@ -1,5 +1,15 @@
 <div class="grid-wrapper">
   <table class="table">
-    <app-grid-header></app-grid-header>
+    <app-grid-header [sorts]="sorts" [columns]="columns" (sort)="onColumnSort($event)">
+      ></app-grid-header>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </datatable-header>
   </table>
 </div>

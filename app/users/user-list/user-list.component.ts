@@ -18,14 +18,33 @@ export class UserListComponent implements OnInit {
     private searchTerms = new Subject<string>();
     usersCopy: User[];
     users: Observable<User[]>;
+    sorts: any[];
+    columns: any[];
     constructor(
         private api: UserService
-    ) { };
+    ) {
+        this.sorts = [{ sortValue: 'id', sortType: 'ASC' }];
+        this.columns = [
+            {
+                label: '用户ID',
+                key: 'id',
+            }, {
+                label: 'Email',
+                key: 'email',
+            }, {
+                label: '用户名',
+                key: 'name',
+            }, {
+                label: '手机号',
+                key: 'phone',
+            },
+        ];
+    };
 
     ngOnInit(): void {
         this.users = this.searchTerms
             .debounceTime(300)        // wait for 300ms pause in events
-            .distinctUntilChanged()   // ignore if next search term is same as previous
+            // .distinctUntilChanged()   // ignore if next search term is same as previous
             .switchMap((term) => {
                 console.log(term);
                 if (term) {

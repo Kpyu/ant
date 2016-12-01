@@ -1,17 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { InMemoryDataService, UserService } from './api';
 import * as pipes from './pipes';
-const pipesArr: Array<any> = Object.keys(pipes)
+
+const pipesArr: Array<any> = Object.keys(pipes);
 pipesArr.forEach((val, index) => {
     pipesArr[index] = pipes[val];
 });
 @NgModule({
     imports: [
+        CommonModule,
         InMemoryWebApiModule.forRoot(InMemoryDataService),
     ],
-    providers: [UserService, InMemoryDataService],
+    providers: [UserService],
     declarations: [
         // ...pipesArr,
     ],
