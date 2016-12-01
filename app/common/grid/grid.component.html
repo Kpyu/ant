@@ -1,15 +1,28 @@
 <div class="grid-wrapper">
-  <table class="table">
-    <app-grid-header [sorts]="sorts" [columns]="columns" (sort)="onColumnSort($event)">
-      ></app-grid-header>
-      <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-    </datatable-header>
+  <table class="table table-bordered table-hover dataTable">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">
+          <div class="datatable-header-cell">
+            <span class="th-label" [innerHTML]="column.label" *ngIf="!column.formatter"> </span>
+            <template *ngIf="column.formatter" [ngTemplateOutlet]="column.formatter" [ngOutletContext]="{ column: column}">
+            </template>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of sourceData">
+        <td *ngFor="let column of columns">{{item[column.key]}}</td>
+      </tr>
+      <tr *ngIf="!sourceData || sourceData.length<=0" >
+        <td [attr.colspan]="columns.length" style="text-align:center">
+          暂无数据
+        </td>
+      </tr>
+    </tbody>
   </table>
+  <grid-pagination
+  [pageConfig]="pageConfig"
+  (pageChanged)="onChangeTable(pageConfig, $event)"></grid-pagination>
 </div>

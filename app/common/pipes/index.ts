@@ -1,1 +1,2 @@
-export { JsonPipe } from './jsonPipes';
+// export { JsonPipe } from './jsonPipes';
+export { NumberToArrayPipe } from './numberToArrayPipe';

@@ -51,7 +51,7 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // mongoose.connect(mongoDB);
 app.use(mongooseMiddleware);
 // app.use(pipeLine());
-app.use(favicon(Path.join(__dirname, '..', '/client/favicon.ico')));
+app.use(favicon(Path.join(__dirname, '..', 'favicon.ico')));
 
 // 添加webpack 中间件
 // if (Config.env ===  'development') {

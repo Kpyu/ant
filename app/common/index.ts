@@ -9,6 +9,7 @@ const pipesArr: Array<any> = Object.keys(pipes);
 pipesArr.forEach((val, index) => {
     pipesArr[index] = pipes[val];
 });
+console.log(pipesArr);
 @NgModule({
     imports: [
         CommonModule,

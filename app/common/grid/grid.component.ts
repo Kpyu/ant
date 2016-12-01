@@ -2,11 +2,10 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-grid',
-    templateUrl: 'grid.component',
+    templateUrl: 'grid.component.html',
     styles: ['grid.component.css'],
 })
 export class GridComponent {
-
     @Input() set columns(val: any[]) {
         if (val) {
             this.setColumnDefaults(val);
@@ -14,14 +13,21 @@ export class GridComponent {
         }
         this._columns = val;
     }
-    get columns(): any[]{
-        return this._columns = [];
+    get columns(): any[] {
+        return this._columns;
     }
     @Input() sorts: any[] = [];
     @Input() source: string;
-    @Input() sourceData: any;
-
+    @Input() sourceData: any[];
+    private pageConfig: any;
     private _columns = [];
+    constructor() {
+        this.pageConfig = {
+            currentPage: 1,
+            pageSize: 10,
+            total: 40,
+        };
+    }
     setColumnDefaults(columns: any[]) {
         console.log('设置默认表头');
     }

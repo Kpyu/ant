@@ -96,7 +96,7 @@ gulp.task('static', function (done) {
 
 gulp.task('compile', ['clean'], (done) => {
   var tsProject = ts.createProject('./server/tsconfig.json');
-  var tsResult = tsProject.src([
+  var tsResult = gulp.src([
     'server/**/*.ts'
   ])
     .pipe(tsProject());

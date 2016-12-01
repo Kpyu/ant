@@ -1,14 +1,13 @@
 <div>
-  user-list
-  <div class="search-result" >
-      {{users|async|json}}
-      {{usersCopy|json}}
-    </div>
+  <h3>user-list</h3>
+  <div class="search-result">
+    {{users|async|json}} {{usersCopy|json}}
+  </div>
   <button (click)="doSearch($event)">search</button>
-</div>
 
-<div class="content">
-  <app-grid
-  [columns]="columns"
-  ></app-grid>
+  <div class="content">
+    <app-grid 
+    [columns]="columns"
+    [sourceData]="usersCopy"></app-grid>
+  </div>
 </div>

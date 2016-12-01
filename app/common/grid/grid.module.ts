@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { GridHeadCellComponent, GridHeadComponent } from './grid-head';
 import { GridComponent } from './grid.component';
+import { GridPaginationComponent } from './pagination.component';
 
+import { NumberToArrayPipe } from '../pipes';
 @NgModule({
   imports: [CommonModule],
-  exports: [GridComponent],
-  declarations: [GridHeadCellComponent, GridHeadComponent, GridComponent],
+  exports: [GridComponent, GridPaginationComponent],
+  declarations: [GridComponent, GridPaginationComponent, NumberToArrayPipe],
   providers: [],
 })
 export class GridModule { }

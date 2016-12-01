@@ -1,0 +1,15 @@
+<div class="dataTables_paginate paging_simple_numbers">
+  <ul class="pagination">
+    <li class="paginate_button previous"><a href="javascript:;">Previous</a></li>
+    <li 
+      *ngFor="let page of pages|numberToArray" 
+      (click)="goToPage(page)" 
+      [ngClass]="{ 'active': (page===pageConfig.currentPage) }" 
+      class="paginate_button">
+      <a href="javascript:;">{{page}}</a>
+    </li>
+    <li class="paginate_button next"><a href="javascript:;">Next</a></li>
+  </ul>
+</div>
+<!--<li class="paginate_button" (click)="gotoPage(page)" *ngIf="page!==pageConfig.currentPage"><a href="javascript:;">{{page}}</a></li>
+      <li class="paginate_button active" *ngIf="page===pageConfig.currentPage"><a href="javascript:;">{{page}}</a></li>-->

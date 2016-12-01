@@ -12,6 +12,7 @@ import { User } from '../../models';
     selector: 'app-user-list',
     templateUrl: 'user-list.component.html',
     providers: [UserService],
+
     // styleUrls: ['view-list.component.css'],
 })
 export class UserListComponent implements OnInit {

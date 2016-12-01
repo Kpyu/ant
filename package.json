@@ -16,18 +16,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alex1512/AntCMS.git"
+    "url": "https://github.com/Kpyu/ant.git"
   },
   "keywords": [
     "cms",
-    "antDesign"
+    "angular2",
+    "typescript"
   ],
   "author": "kpyu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Alex1512/AntCMS/issues"
+    "url": "https://github.com/Kpyu/ant/issues"
   },
-  "homepage": "https://github.com/Alex1512/AntCMS#readme",
+  "homepage": "https://github.com/Kpyu/ant#readme",
   "dependencies": {
     "@angular/common": "~2.2.4",
     "@angular/compiler": "~2.2.4",
@@ -54,6 +55,7 @@
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "ejs": "^2.5.3",
     "font-awesome": "^4.7.0",
     "glob": "^7.1.1",
     "immutable": "^3.8.1",
@@ -80,6 +82,7 @@
     "awesome-typescript-loader": "^2.2.4",
     "codelyzer": "^1.0.0-beta.3",
     "concurrently": "^3.0.0",
+    "css-loader": "^0.26.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "gulp-changed": "^1.3.2",
