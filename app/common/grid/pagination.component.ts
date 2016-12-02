@@ -7,8 +7,7 @@ import { Component, EventEmitter, HostListener, Input, Output } from '@angular/c
     styleUrls: [],
 })
 export class GridPaginationComponent {
-    @Output() public pageChanged: EventEmitter<any> = new EventEmitter();
-
+    @Output() public gridChanged: EventEmitter<any> = new EventEmitter();
     @Input()
     get pageConfig(): any {
         return this._pageConfig;
@@ -37,17 +36,18 @@ export class GridPaginationComponent {
     constructor() { }
     @HostListener('pageChanged', ['$event'])
     public onChangePage(event: any): void {
-        this.pageChanged.emit({ paging: event });
+        this.gridChanged.emit({ paging: event });
     }
-    goToPage(pageNumber: number) {
+    goToPage(pageNumber?: number) {
         console.log(`gotoPage---${pageNumber}`);
-        this.pageConfig.currentPage = pageNumber;
-        // this.pageChanged.emit({ paging: event });
+        this.pageConfig.currentPage = pageNumber || this.pageConfig.currentPage;
+        this.onChangePage({ currentPage: this.pageConfig.currentPage });
     }
     prev() {
         if (!this.isFirst) {
             this.pageConfig.currentPage--;
         }
+        this.goToPage();
     }
     prevList() {
         const { currentPage, pageWidth} = this.pageConfig;
@@ -61,6 +61,7 @@ export class GridPaginationComponent {
         if (!this.isLast) {
             this.pageConfig.currentPage++;
         }
+        this.goToPage();
     }
     nextList() {
         const { currentPage, pageWidth} = this.pageConfig;

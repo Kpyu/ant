@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input } from '@angular/core';
 
 @Component({
     selector: 'app-grid',
@@ -46,5 +46,8 @@ export class GridComponent {
 
     loadGridData() {
 
+    }
+    onChangeGrid(pageConfig: any, $event: EventEmitter<any>) {
+        debugger;
     }
 }
