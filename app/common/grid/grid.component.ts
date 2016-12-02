@@ -25,7 +25,8 @@ export class GridComponent {
         this.pageConfig = {
             currentPage: 1,
             pageSize: 10,
-            total: 40,
+            pageWidth: 5,
+            total: 400,
         };
     }
     setColumnDefaults(columns: any[]) {

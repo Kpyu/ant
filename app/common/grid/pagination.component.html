@@ -1,14 +1,21 @@
 <div class="dataTables_paginate paging_simple_numbers">
+  <span>当前页码{{pageConfig.currentPage}} 总页数{{pages}}</span>
   <ul class="pagination">
-    <li class="paginate_button previous"><a href="javascript:;">Previous</a></li>
+    <li class="paginate_button previous" [ngClass]="{'disabled':isFirst}" ><a (click)="prev()" href="javascript:;">Previous</a></li>
+    <li *ngIf="hasPrev" class="paginate_button">
+      <a href="javascript:;" (click)="prevList()">...</a>
+    </li>
     <li 
-      *ngFor="let page of pages|numberToArray" 
+      *ngFor="let page of pages|numberToArray:pageConfig.pageWidth:pageConfig.currentPage" 
       (click)="goToPage(page)" 
       [ngClass]="{ 'active': (page===pageConfig.currentPage) }" 
       class="paginate_button">
       <a href="javascript:;">{{page}}</a>
     </li>
-    <li class="paginate_button next"><a href="javascript:;">Next</a></li>
+     <li *ngIf="hasNext"  class="paginate_button">
+      <a href="javascript:;"  (click)="nextList()">...</a>
+    </li>
+    <li class="paginate_button next" [ngClass]="{'disabled':isLast}"><a (click)="next()" href="javascript:;">Next</a></li>
   </ul>
 </div>
 <!--<li class="paginate_button" (click)="gotoPage(page)" *ngIf="page!==pageConfig.currentPage"><a href="javascript:;">{{page}}</a></li>
