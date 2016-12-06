@@ -12,7 +12,6 @@ import { User } from '../../models';
     selector: 'app-user-list',
     templateUrl: 'user-list.component.html',
     providers: [UserService],
-
     // styleUrls: ['view-list.component.css'],
 })
 export class UserListComponent implements OnInit {
@@ -21,6 +20,7 @@ export class UserListComponent implements OnInit {
     users: Observable<User[]>;
     sorts: any[];
     columns: any[];
+    public userPageConfig: any;
     constructor(
         private api: UserService
     ) {
@@ -40,6 +40,12 @@ export class UserListComponent implements OnInit {
                 key: 'phone',
             },
         ];
+        this.userPageConfig = {
+            currentPage: 1,
+            total: 0,
+            pageSize: 10,
+            pageWidth: 5,
+        };
     };
 
     ngOnInit(): void {
@@ -58,17 +64,20 @@ export class UserListComponent implements OnInit {
                 return Observable.of<User[]>([]);
             });
     }
-    doSearch(): void {
-        // this.searchTerms.next('term')
+    search(params: any) {
         this.api
-            .getUseList('')
-            .then(users => this.usersCopy = users);
+            .getUseList(params)
+            .then((users) => {
+                this.usersCopy = users;
+                this.userPageConfig.total = 400;
+            });
+    }
+    doSearch(): void {
+        this.search({});
     }
     onGridLoad($event) {
         const { params } = $event;
         console.log(`获取搜索参数${JSON.stringify(params)}`);
-        this.api
-            .getUseList(params)
-            .then(users => this.usersCopy = users);
+        this.search(params);
     }
 }

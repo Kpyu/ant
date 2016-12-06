@@ -20,16 +20,9 @@ export class GridComponent {
     @Input() sorts: any[] = [];
     @Input() source: string;
     @Input() sourceData: any[];
-    private pageConfig: any;
+    @Input() pageConfig: any;
     private _columns = [];
-    constructor() {
-        this.pageConfig = {
-            currentPage: 1,
-            pageSize: 10,
-            pageWidth: 5,
-            total: 400,
-        };
-    }
+    constructor() { }
     setColumnDefaults(columns: any[]) {
         console.log('设置默认表头');
     }

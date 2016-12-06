@@ -5,6 +5,7 @@
     <li *ngIf="hasPrev" class="paginate_button">
       <a href="javascript:;" (click)="prevList()">...</a>
     </li>
+    <li class="paginate_button" *ngIf="pages===0"  [ngClass]="{'disabled':pages===0}"><a href="javascript:;">1</a></li>
     <li 
       *ngFor="let page of pages|numberToArray:pageConfig.pageWidth:pageConfig.currentPage" 
       (click)="goToPage(page)" 
@@ -18,5 +19,3 @@
     <li class="paginate_button next" [ngClass]="{'disabled':isLast}"><a (click)="next()" href="javascript:;">Next</a></li>
   </ul>
 </div>
-<!--<li class="paginate_button" (click)="gotoPage(page)" *ngIf="page!==pageConfig.currentPage"><a href="javascript:;">{{page}}</a></li>
-      <li class="paginate_button active" *ngIf="page===pageConfig.currentPage"><a href="javascript:;">{{page}}</a></li>-->

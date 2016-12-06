@@ -10,6 +10,7 @@ export class GridPaginationComponent {
     @Output() public gridChanged: EventEmitter<any> = new EventEmitter();
     @Input()
     get pageConfig(): any {
+        this.pages = Math.ceil(this._pageConfig.total / this._pageConfig.pageSize);
         return this._pageConfig;
     }
     set pageConfig(config: any) {
