@@ -39,9 +39,12 @@ export class GridPaginationComponent {
         this.gridChanged.emit({ paging: event });
     }
     goToPage(pageNumber?: number) {
-        console.log(`gotoPage---${pageNumber}`);
+        console.log(`gotoPage---${pageNumber || this.pageConfig.currentPage}`);
         this.pageConfig.currentPage = pageNumber || this.pageConfig.currentPage;
-        this.onChangePage({ currentPage: this.pageConfig.currentPage });
+        this.onChangePage({
+            currentPage: this.pageConfig.currentPage,
+            pageSize: this.pageConfig.pageSize
+        });
     }
     prev() {
         if (!this.isFirst) {

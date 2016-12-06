@@ -8,6 +8,7 @@
   <div class="content">
     <app-grid 
     [columns]="columns"
+    (dataFetch)="onGridLoad($event)"
     [sourceData]="usersCopy"></app-grid>
   </div>
 </div>

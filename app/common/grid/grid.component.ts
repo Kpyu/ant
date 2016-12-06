@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'app-grid',
@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input } from '@angular/core';
     styles: ['grid.component.css'],
 })
 export class GridComponent {
+    @Output() public dataFetch: EventEmitter<any> = new EventEmitter();
     @Input() set columns(val: any[]) {
         if (val) {
             this.setColumnDefaults(val);
@@ -44,10 +45,12 @@ export class GridComponent {
 
     }
 
-    loadGridData() {
-
+    loadGridData(params) {
+        console.log('分页发生变化重新load数据');
+        this.dataFetch.emit({ params })
     }
-    onChangeGrid(pageConfig: any, $event: EventEmitter<any>) {
-        debugger;
+    onChangeGrid($event: any) {
+        const { paging } = $event;
+        this.loadGridData(paging);
     }
 }

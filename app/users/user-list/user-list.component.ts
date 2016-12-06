@@ -64,4 +64,11 @@ export class UserListComponent implements OnInit {
             .getUseList('')
             .then(users => this.usersCopy = users);
     }
+    onGridLoad($event) {
+        const { params } = $event;
+        console.log(`获取搜索参数${JSON.stringify(params)}`);
+        this.api
+            .getUseList(params)
+            .then(users => this.usersCopy = users);
+    }
 }
