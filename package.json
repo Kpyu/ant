@@ -48,6 +48,7 @@
     "@types/koa-router": "^7.0.21",
     "@types/koa-static": "^2.0.21",
     "@types/mongoose": "^4.6.2",
+    "@types/uid-safe": "^2.1.1",
     "@types/webpack": "^2.0.0",
     "admin-lte": "^2.3.8",
     "angular-in-memory-web-api": "^0.1.15",
@@ -64,6 +65,7 @@
     "koa-bodyparser": "^2.2.0",
     "koa-favicon": "^2.0.0",
     "koa-router": "^7.0.1",
+    "koa-session": "^3.4.0",
     "koa-static": "^2.0.0",
     "koa-views": "^5.1.2",
     "less": "^2.7.1",
@@ -72,6 +74,7 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
+    "uid-safe": "^2.1.3",
     "util": "^0.10.3",
     "zone.js": "^0.6.25"
   },

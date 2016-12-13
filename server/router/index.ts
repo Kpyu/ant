@@ -23,12 +23,16 @@ const router = new Router();
 const DEBUG: boolean = process.env.NODE_ENV === 'development';
 
 export interface IContext extends IRouterContext {
+    session: any;
     render(view: string): void;
     model(modelName: string): any;
 }
 
 router.get('/admin', async (ctx: IContext, next: Router.IMiddleware) => {
     // ctx.body = 'test!';
+    if (ctx.session) {
+        ctx.session.user = 'admin';
+    }
     if (DEBUG) {
         await ctx.render('index-w');
     } else {

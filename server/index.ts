@@ -32,11 +32,12 @@ import config from './config';
 import pipeLine from './middleware/assetsPipeLine';
 import mongooseMiddleware from './middleware/koa-mongoose';
 
-global['__DB__'] =  mongoose.connect(config.mongoUrl).connection;
+global['__DB__'] = mongoose.connect(config.mongoUrl).connection;
 
 // import renderApp from './serverRender';
 import Config from './config';
 import router from './router';
+import koaSession from './middleware/sessionMiddleWare';
 const app = new Koa();
 const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 
@@ -47,16 +48,11 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // })));
 
 
+app.use(koaSession({ maxAge: 30000 }));
 
-// mongoose.connect(mongoDB);
 app.use(mongooseMiddleware);
-// app.use(pipeLine());
-app.use(favicon(Path.join(__dirname, '..', 'favicon.ico')));
 
-// 添加webpack 中间件
-// if (Config.env ===  'development') {
-//   Config.developmentMiddleWare(app);
-// }
+app.use(favicon(Path.join(__dirname, '..', 'favicon.ico')));
 
 // 添加ejs视图解析器
 app.use(views(Path.resolve(__dirname, '../', 'views'), {
@@ -64,10 +60,6 @@ app.use(views(Path.resolve(__dirname, '../', 'views'), {
     html: 'ejs',
   },
 }));
-
-// 添加react渲染器
-// renderReact(app, Config.reactConfig);
-// app.context.react = co.wrap(app.context.react);
 
 
 // 添加静态资源服务中间件
