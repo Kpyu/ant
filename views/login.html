@@ -47,13 +47,13 @@ desired effect
         <div class="login-box-body">
             <p class="login-box-msg">登录</p>
 
-            <form action="/doLogin" method="post">
+            <form action="/login" method="post">
                 <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="Email">
+                    <input type="input" name="account" class="form-control" placeholder="Email/Account" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="row">

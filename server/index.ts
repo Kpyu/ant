@@ -36,8 +36,8 @@ global['__DB__'] = mongoose.connect(config.mongoUrl).connection;
 
 // import renderApp from './serverRender';
 import Config from './config';
-import router from './router';
 import koaSession from './middleware/sessionMiddleWare';
+import router from './router';
 const app = new Koa();
 const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 

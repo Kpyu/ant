@@ -28,10 +28,16 @@ export interface IContext extends IRouterContext {
     model(modelName: string): any;
 }
 
+router.get('/', async (ctx: IContext, next: Router.IMiddleware) => {
+    console.log('进入博客首页');
+    await ctx.render('blog/index');
+});
+
 router.get('/admin', async (ctx: IContext, next: Router.IMiddleware) => {
     // ctx.body = 'test!';
-    if (ctx.session) {
-        ctx.session.user = 'admin';
+    if (!ctx.session.user) {
+        ctx.redirect('/login');
+        return ;
     }
     if (DEBUG) {
         await ctx.render('index-w');
@@ -49,7 +55,13 @@ router.get('/login', async (ctx: IContext, next: Router.IMiddleware) => {
 
 // 执行登录
 router.post('/login', async (ctx: IContext, next: Router.IMiddleware) => {
-    await ctx.render('login');
+    console.log(ctx.req.pipe)
+    ctx.session.user = 'admin';
+    await ctx.redirect('/admin');
+});
+router.get('/logout', async (ctx: IContext, next: Router.IMiddleware) => {
+    delete ctx.session.user;
+    await ctx.redirect('/login');
 });
 
 // 跳转注册页面
