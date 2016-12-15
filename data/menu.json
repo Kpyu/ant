@@ -4,20 +4,7 @@
     "menuId":1,
     "level": 1,
     "icon":"user",
-    "children":[
-      {
-        "name": "测试",
-        "menuId":101,
-        "level": 2,
-        "icon":"user"
-      },
-      {
-        "name": "测试",
-        "menuId":102,
-        "level": 2,
-        "icon":"user"
-      }
-    ]
+    "children":[]
   },
   {
     "name":"内容管理",

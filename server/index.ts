@@ -34,7 +34,6 @@ import mongooseMiddleware from './middleware/koa-mongoose';
 
 global['__DB__'] = mongoose.connect(config.mongoUrl).connection;
 
-// import renderApp from './serverRender';
 import Config from './config';
 import koaSession from './middleware/sessionMiddleWare';
 import router from './router';
@@ -48,7 +47,7 @@ const mongoDB = process.env.MONGODB_URI || Config.mongoUrl;
 // })));
 
 
-app.use(koaSession({ maxAge: 30000 }));
+app.use(koaSession({ maxAge: 3000000, expires: new Date(Date.now() + 3000000) }));
 
 app.use(mongooseMiddleware);
 
@@ -78,7 +77,7 @@ app.use(bodyParser());
 // 注册路由
 app.use(router.routes());
 // app.use(router.allowedMethods());
-app.listen(Config.port, function () {
+app.listen(Config.port, () => {
   console.log('Start app listening at http://localhost:%s, environment:%s', Config.port, Config.env);
 });
 

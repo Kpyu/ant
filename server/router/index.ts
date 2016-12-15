@@ -19,6 +19,9 @@
 
 import * as Router from 'koa-router';
 import { IRouterContext } from 'koa-router';
+
+import { api } from './admin';
+
 const router = new Router();
 const DEBUG: boolean = process.env.NODE_ENV === 'development';
 
@@ -28,50 +31,61 @@ export interface IContext extends IRouterContext {
     model(modelName: string): any;
 }
 
-router.get('/', async (ctx: IContext, next: Router.IMiddleware) => {
+router.get('/', async (ctx: IContext, next: any) => {
     console.log('进入博客首页');
     await ctx.render('blog/index');
 });
 
-router.get('/admin', async (ctx: IContext, next: Router.IMiddleware) => {
+router.get('/admin/*/**', async (ctx: IContext, next: any) => {
     // ctx.body = 'test!';
-    if (!ctx.session.user) {
-        ctx.redirect('/login');
-        return ;
-    }
+    await next();
+    // if (!ctx.session.user) {
+    //     ctx.body = {
+    //         suceess: false,
+    //         msg: '登录失效',
+    //         code: '10000',
+    //     };
+    //     await ctx.toJSON();
+    // } else {
+    //     await next();
+    // }
+});
+router.get('/admin', async (ctx: IContext, next: any) => {
+    // if (!ctx.session.user) {
+    //     ctx.redirect('/login');
+    //     return;
+    // }
     if (DEBUG) {
         await ctx.render('index-w');
     } else {
         await ctx.render('index-aot');
     }
 });
-
-
 // 跳转登录页面
-router.get('/login', async (ctx: IContext, next: Router.IMiddleware) => {
+router.get('/login', async (ctx: IContext, next: any) => {
     await ctx.render('login');
 });
 
 
 // 执行登录
-router.post('/login', async (ctx: IContext, next: Router.IMiddleware) => {
-    console.log(ctx.req.pipe)
+router.post('/login', async (ctx: IContext, next: any) => {
+    console.log(ctx.req.pipe);
     ctx.session.user = 'admin';
     await ctx.redirect('/admin');
 });
-router.get('/logout', async (ctx: IContext, next: Router.IMiddleware) => {
+router.get('/logout', async (ctx: IContext, next: any) => {
     delete ctx.session.user;
     await ctx.redirect('/login');
 });
 
 // 跳转注册页面
-router.get('/resgistry', async (ctx: IContext, next: Router.IMiddleware) => {
+router.get('/resgistry', async (ctx: IContext, next: any) => {
     await ctx.render('login');
 });
 
 
 // 执行注册
-router.post('/resgistry', async (ctx: IContext, next: Router.IMiddleware) => {
+router.post('/resgistry', async (ctx: IContext, next: any) => {
     let User = ctx.model('user');
     let user = await User.findOne({
         username: 'admin',
@@ -94,4 +108,7 @@ router.post('/resgistry', async (ctx: IContext, next: Router.IMiddleware) => {
     }
 
 });
+
+api(router);
+
 export default router;

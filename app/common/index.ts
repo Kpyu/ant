@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-import { InMemoryDataService, UserService } from './api';
+import { MenuService, UserService } from './api';
 import * as pipes from './pipes';
 
 const pipesArr: Array<any> = Object.keys(pipes);
@@ -13,9 +12,8 @@ console.log(pipesArr);
 @NgModule({
     imports: [
         CommonModule,
-        InMemoryWebApiModule.forRoot(InMemoryDataService),
     ],
-    providers: [UserService],
+    providers: [UserService, MenuService],
     declarations: [
         // ...pipesArr,
     ],

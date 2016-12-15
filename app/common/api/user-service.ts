@@ -27,7 +27,7 @@ export class UserService {
    * @memberOf DataService
    */
   getUseList(params: any): Promise<User[]> {
-    return this.http.get('/app/users')//`${this.apiUrl}/getUseList/users`)
+    return this.http.get(`${this.apiUrl}/userList`)
       .toPromise()
       .then((response: Response) => response.json().data as User[])
       .catch(this.handleError);
@@ -41,7 +41,7 @@ export class UserService {
    * @memberOf UserService
    */
   updateUseById(id: string): Promise<User[]> {
-    return this.http.get(`${this.apiUrl}/getUseList`)
+    return this.http.get(`${this.apiUrl}/userList`)
       .toPromise()
       .then((response: Response) => response.json().data as User[])
       .catch(this.handleError);
@@ -54,10 +54,9 @@ export class UserService {
    * 
    * @memberOf UserService
    */
-  // searchUser(params: any): Observable<User[]>
   searchUser(term: string): Observable<User[]> {
     console.log('search user');
-    return this.http.get('/app/users') // `${this.apiUrl}/getUseList?param=${term}`)
+    return this.http.get(`${this.apiUrl}/userList?param=${term}`)
       .map((res: Response) => {
         console.log(res.json().data);
         return res.json().data as User[];
