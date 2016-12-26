@@ -64,7 +64,7 @@ export class UserListComponent implements OnInit {
                 return Observable.of<User[]>([]);
             });
     }
-    search(params: any) {
+    search(params: any): void {
         this.api
             .getUseList(params)
             .then((users) => {
@@ -79,5 +79,8 @@ export class UserListComponent implements OnInit {
         const { params } = $event;
         console.log(`获取搜索参数${JSON.stringify(params)}`);
         this.search(params);
+    }
+    addUser($event): void {
+
     }
 }

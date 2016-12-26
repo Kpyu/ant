@@ -6,11 +6,14 @@ import { CommonModule } from '@angular/common';
 import { GridModule } from '../common/grid';
 import { UserListComponent } from './user-list';
 import { UserRoutingModule } from './user.routing';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   imports: [CommonModule, UserRoutingModule, GridModule],
   exports: [],
-  declarations: [UserListComponent],
+  declarations: [UserListComponent,
+    UserEditComponent
+],
   providers: [],
 })
 export class UserModule { }

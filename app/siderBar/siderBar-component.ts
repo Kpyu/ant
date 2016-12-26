@@ -10,7 +10,7 @@ import {
   Output,
 } from '@angular/core';
 import { MenuService } from '../common/api/menu-service';
-
+import { MenuItem } from '../models/menuItem';
 @Component({
   moduleId: 'sider-bar',
   selector: 'sider-bar',
@@ -30,10 +30,12 @@ import { MenuService } from '../common/api/menu-service';
         transition('inactive=>active', animate('100ms ease-in')),
         transition('active=>inactive', animate('100ms ease-out')),
       ]),
+    trigger('menuOpen', []),
   ],
 })
 export class SiderBarComponent implements OnInit {
   @Input() state: string;
+  public currentMenuId: number;
   public menus: any;
   constructor(private menuApi: MenuService) { }
   ngOnInit() {
@@ -43,5 +45,10 @@ export class SiderBarComponent implements OnInit {
     }).catch(err => {
       console.error(err);
     });
+  }
+  selectMenu($event: any, menuItem: MenuItem) {
+    debugger
+    $event.stopPropagation();
+    this.currentMenuId = menuItem.menuId;
   }
 }

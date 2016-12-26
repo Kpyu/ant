@@ -3,24 +3,33 @@
     "name":"个人中心",
     "menuId":1,
     "level": 1,
-    "icon":"user",
+    "icon":"user-circle",
     "children":[]
   },
   {
     "name":"内容管理",
     "menuId":2,
     "level": 1,
-    "icon":"laptop",
+    "icon":"tasks",
     "children":[
       {
-        "name": "测试",
+        "name": "栏目管理",
         "menuId":201,
         "level": 2,
         "icon":"user"
-      },
-      {
-        "name": "测试",
+      },{
+        "name": "文章模型",
         "menuId":202,
+        "level": 2,
+        "icon":"user"
+      },{
+        "name": "产品模型",
+        "menuId":203,
+        "level": 2,
+        "icon":"user"
+      },{
+        "name": "问答模型",
+        "menuId":204,
         "level": 2,
         "icon":"user"
       }
@@ -29,18 +38,27 @@
   {
     "name":"模块管理",
     "menuId":3,
-    "icon":"folder",
+    "icon":"medium",
     "level": 1,
     "children":[
       {
-        "name": "测试",
+        "name": "模块分类",
         "menuId":301,
         "level": 2,
         "icon":"user"
-      },
-      {
-        "name": "测试",
+      },{
+        "name": "幻灯管理",
         "menuId":302,
+        "level": 2,
+        "icon":"user"
+      },{
+        "name": "友情链接",
+        "menuId":303,
+        "level": 2,
+        "icon":"user"
+      },{
+        "name": "导航管理",
+        "menuId":304,
         "level": 2,
         "icon":"user"
       }
@@ -49,22 +67,33 @@
   {
     "name":"系统管理",
     "menuId":4,
-    "icon":"setting",
+    "icon":"cog",
     "level": 1,
     "children":[
       {
         "name": "用户管理",
         "menuId":401,
         "level": 2,
-        "url":"/manage/user",
+        "url":"/admin/user",
         "icon":"user"
-      },
-      {
+      },{
         "name": "角色管理",
         "menuId":402,
         "level": 2,
-        "url":"/manage/userGroup",
-        "icon":"user"
+        "url":"/admin/userGroup",
+        "icon":"group"
+      },{
+        "name": "权限菜单",
+        "menuId":403,
+        "level": 2,
+        "url":"/admin/purview",
+        "icon":"group"
+      },{
+        "name": "站点设置",
+        "menuId":403,
+        "level": 2,
+        "url":"/admin/purview",
+        "icon":"group"
       }
     ]
   }

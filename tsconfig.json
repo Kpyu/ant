@@ -12,6 +12,8 @@
     "exclude": [
         "typings/main.d.ts",
         "typings/main",
-        "node_modules"
+        "node_modules",
+        "server",
+        "dts"
     ]
 }

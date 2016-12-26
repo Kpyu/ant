@@ -1,13 +1,27 @@
-<div>
-  <h3>user-list</h3>
-  <div class="search-result">  </div>
-  <button (click)="doSearch($event)">search</button>
-
-  <div class="content">
-    <app-grid 
-    [columns]="columns"
-    (dataFetch)="onGridLoad($event)"
-    [pageConfig]="userPageConfig"
-    [sourceData]="usersCopy"></app-grid>
-  </div>
+<div class="app-user-list">
+  <section class="content-header">
+    <h1>用户列表 <small> </small></h1>
+    <ol class="breadcrumb">
+      <li>
+        <a href="/admin/main"><i class="fa fa-dashboard"></i>用户列表</a>
+      </li>
+    </ol>
+  </section>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-default">
+          <div class="box-header with-border">
+            <button (click)="doSearch($event)" class="btn btn-primary">search</button>
+            <button (click)="addUser($event)" class="btn btn-primary">添加用户</button>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <app-grid [columns]="columns" (dataFetch)="onGridLoad($event)" [pageConfig]="userPageConfig" [sourceData]="usersCopy"></app-grid>
+          </div>
+          <!-- /.box-body -->
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

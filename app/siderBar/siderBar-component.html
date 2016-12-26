@@ -33,15 +33,15 @@
   <!-- Optionally, you can add icons to the links -->
   <li *ngFor="let item of menus" [ngClass]="{'treeview':item.children.length,
                                               'active':item.menuId==currentMenuId }">
-    <a href="javascript:void(0)" *ngIf="!item.url">
-      <i class="fa fa-link"></i>
+    <a href="javascript:void(0)" *ngIf="!item.url" (click)="selectMenu($event,item)">
+      <i class="fa" [ngClass]="'fa-'+item.icon"></i>
       <span>{{item.name}}</span>
       <span class="pull-right-container" *ngIf="item.children.length" >
         <i class="fa fa-angle-left pull-right"></i>
       </span>
     </a>
     <a *ngIf="item.url" href="{{item.url}}">
-      <i class="fa fa-link"></i>
+      <i class="fa" [ngClass]="'fa-'+item.icon" ></i>
       <span>{{item.name}}</span>
       <span class="pull-right-container" *ngIf="item.children.length">
         <i class="fa fa-angle-left pull-right"></i>
